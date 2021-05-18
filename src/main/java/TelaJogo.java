@@ -1,10 +1,11 @@
+import java.util.Random;
 
 /**
  * @author hlima
  */
 public class TelaJogo extends javax.swing.JFrame {
     
-    int QtAlimentos, QtPessoas, QtVilas, QtRiquezas, QtArmas, QtSoldados, Status, Vt;
+    int QtAlimentos, QtPessoas, QtVilas, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor;
     
     long totalMilisegundos = System.currentTimeMillis()-10800000;
     long totalSegundos = totalMilisegundos / 1000;
@@ -13,53 +14,85 @@ public class TelaJogo extends javax.swing.JFrame {
     long minutoAtual = totalMinutos % 60;
     long totalHora = totalMinutos / 60;
     long horaAtual = totalHora % 24;
-    
-    long Delay;
-    
+
+    Random aleatorio = new Random();    //gerador de numeros
+        
     public TelaJogo() {
         initComponents();
         Jogo();
-
     }
-    void IniciarJogo(){
-        QtAlimentos = 50;
-        QtPessoas = 10;
-        QtRiquezas = 0;
-        QtArmas = 0;
-        QtSoldados = 0;
-        QtVilas = 1;
-        
-        lblValoresAlimentos.setText(Integer.toString(QtAlimentos));
-        lblValoresPessoas.setText(Integer.toString(QtPessoas));
-        lblValoresRiquezas.setText(Integer.toString(QtRiquezas));
-        lblValoresArmas.setText(Integer.toString(QtArmas));
-        lblValoresSoldados.setText(Integer.toString(QtSoldados));
-        LimparOp();
+    void IniciarAtualizar(){
+
+        if (VtPrimeirosPassos==0) {
+
+            QtAlimentos = 100;
+            QtPessoas = 10;
+            QtRiquezas = 0;
+            QtArmas = 0;
+            QtSoldados = 0;
+            QtVilas = 1;
+        } else {
+            lblValoresAlimentos.setText(Integer.toString(QtAlimentos)+"%");
+            lblValoresPessoas.setText(Integer.toString(QtPessoas));
+            lblValoresRiquezas.setText(Integer.toString(QtRiquezas));
+            lblValoresArmas.setText(Integer.toString(QtArmas));
+            lblValoresSoldados.setText(Integer.toString(QtSoldados));
+            lblValoresVilas.setText(Integer.toString(QtVilas));
+        }
+        LimparOp();       
     }
     
     void LimparOp(){            // limpar as opções 
         btnOp1.setText("-");
         btnOp2.setText("-");
         btnOp3.setText("-");
-        Vt=0;
-    }
-    
-    void Delay() {
-     try{
-         System.out.println("teste1");
-         Thread.sleep(4000);}catch(Exception erro){
-         System.out.println("teste2");
-         }
-        
     }
  
     void PrimeirosPassos(){
        
         if (Vt==2) {
-            lblMsg.setText("Maravilha, vamos la!");
-            lblMsg.setText("deu certo");
-           
-         
+            btnOp1.setText("Ok");
+            lblMsg.setText("<html>No canto direito podemos observa<br/> a quantidade de pessoas que <br/>temos em nossa vila.<br/><br/> Atualmente temos 10 Pessoas.</html>");
+            
+            switch (VtPrimeirosPassos) {
+                case 1:
+            
+                lblMsg.setText("<html>Abaixo temos os alimentos das vilas,<br/> nunca deixe abaixo da metade.<br/> Isso pode gerar um pouco de <br/> confusão nas cidades!<br/><br/></html>");
+                    
+                break;
+                case 2:
+                    
+                lblMsg.setText("<html>Como estamos começando,<br/> temos apenas uma vila... <br/>mas tenho certeza que vamos<br/> conseguir muito mais!</html>");
+
+                break;
+                case 3:
+
+                lblMsg.setText("<html>E não podemos esquecer<br/> as nossas riquezas! <br/> quanto maior for o nosso posicionamento<br/> mais feliz os cidadões ficam! <br/> mas cuidado, isso tambem pode atrair latroes!</html>");
+
+                break;
+                case 4:
+
+                lblMsg.setText("<html>Ao lado esquerdo<br/> podemos observar quantos </br> soltados temos.<br/> Quanto mais melhor! <br/> isso deixa as vilas mais seguras </html>");
+
+                break;
+                case 5:
+
+                lblMsg.setText("<html>Abaixo temos as armas,<br/> precisamos sempre estar<br/> armados para futuros confrontos.</html>");
+
+                break;
+                case 6:
+
+                lblMsg.setText("<html>E por fim, temos o status<br/> fique de olhada para saber como as<br/> coisas estão indo.</html>");
+
+                break;
+                case 7:
+
+                lblMsg.setText("<html>Agora vamos trabalhar!</html>");
+                btnOp1.setText("Vamos la!");
+
+                break;
+            }
+          
         }else{
         lblMsg.setText("<html>Ola, seja bem vindo! <br/> estou aqui para te ensinar meu lorde!<br/><br/>Gostaria de um tutorial?</html>");
         btnOp1.setText("Sim");
@@ -67,16 +100,40 @@ public class TelaJogo extends javax.swing.JFrame {
         Vt=1;           //variavel para tutorial
         }
     }
+   
     void Historia(){
-    
+
+        Valor = aleatorio.nextInt(2)+1;
+
+        switch (Valor) {
+            case 1:
+                lblMsg.setText("<html>Ola meu Sr.<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
+                btnOp1.setText("Sim");
+                btnOp3.setText("Não");
+                Vt=11;              //Numero da historia nos botões
+            break;
+            case 2:
+                lblMsg.setText("<html>Ola meu Sr.<br/>um grupo de pessoas estão<br/>indo embora, o que devemos fazer?</html>");
+                btnOp1.setText("Deixar eles irem");
+                btnOp2.setText("Pedir para ficar");
+                btnOp3.setText("Não deixar ninguem ir");
+                Vt=12;              //Numero da historia nos botões
+            break;
+        }
+
     }
+
     void Jogo(){
         
-        IniciarJogo();
+        IniciarAtualizar();
+        if (VtPrimeirosPassos <= 7) {
         PrimeirosPassos();
+        } else {
         Historia();
-        System.out.println("jogo");
-    
+        }
+        System.out.println("VtPrimeirosPassos "+VtPrimeirosPassos);
+        System.out.println("Vt "+Vt);
+
     }
     
     /**
@@ -126,6 +183,7 @@ public class TelaJogo extends javax.swing.JFrame {
         btnOp1.setForeground(new java.awt.Color(204, 204, 204));
         btnOp1.setText("Opção 1");
         btnOp1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED, new java.awt.Color(153, 153, 153), new java.awt.Color(204, 204, 204), new java.awt.Color(51, 51, 51), new java.awt.Color(102, 102, 102)));
+        btnOp1.setContentAreaFilled(false);
         btnOp1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnOp1ActionPerformed(evt);
@@ -348,24 +406,44 @@ public class TelaJogo extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSairActionPerformed
 
     private void btnOp1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOp1ActionPerformed
-        // Opção 1
+        // #Opção 1
         switch(Vt){
-            case 1:     //Tutorial
+            case 1:     //Iniviar Tutorial
                 Vt=2;
                 PrimeirosPassos();
+                btnOp3.setText("Finalizar");
+            break;
+            case 2:     //Fazer o Tutorial
+                VtPrimeirosPassos++;
+                PrimeirosPassos();
+            break;      //fim do tutorial  
+            case 11:    //Inicio Historia
+                lblMsg.setText("<html>Muito bem meu lorde.<br/>Eles ficam gratos!<html/>");
+                QtPessoas+=6;
             break;
         }
+        Jogo();
         
     }//GEN-LAST:event_btnOp1ActionPerformed
 
     private void btnOp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOp2ActionPerformed
-        // Opção 2
+        // #Opção 2
     }//GEN-LAST:event_btnOp2ActionPerformed
 
     private void btnOp3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOp3ActionPerformed
-        // Opção 3
-    }//GEN-LAST:event_btnOp3ActionPerformed
+        // #Opção 3
 
+        switch(Vt){
+            case 1:     //Não quero iniciar Tutorial?
+                VtPrimeirosPassos+=7;
+            break;      //fim do tutorial
+            case 11:    //Inicio Historia
+                lblMsg.setText("<html>Muito bem meu lorde.<br/>Eles foram embora<html/>");
+            break;
+        }
+        Jogo();
+    }//GEN-LAST:event_btnOp3ActionPerformed
+    
     /**
      * @param args the command line arguments
      */
