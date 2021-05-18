@@ -111,7 +111,7 @@ public class TelaJogo extends javax.swing.JFrame {
    
     void Historia(){
 
-        Valor = aleatorio.nextInt(2)+1;
+        Valor = aleatorio.nextInt(3)+1;
 
         switch (Valor) {
             case 1:
@@ -126,6 +126,20 @@ public class TelaJogo extends javax.swing.JFrame {
                 btnOp2.setText("Pedir para ficar");
                 btnOp3.setText("Não deixar ninguem ir");
                 Vt=12;              //Numero da historia nos botões
+            break;
+            case 3:
+                lblMsg.setText("<html>Meu Sr.<br/>um tigre esta atacando a vila, <br/>o que devemos fazer?</html>");
+                btnOp1.setText("O importante é proteger as pessoas!");
+                btnOp2.setText("O importante é matar o tigre");
+                btnOp3.setText("Espera ele ir embora");
+                Vt=13;              //Numero da historia nos botões
+            break;
+            case 4:
+                lblMsg.setText("<html>Meu Sr.<br/>um forasteiro chegou na vila<br/>pedindo para ficar</html>");
+                btnOp1.setText("Pode deixar ele fica");
+                btnOp2.setText("Fica de olho nele");
+                btnOp3.setText("Não quero ele aqui");
+                Vt=14;              //Numero da historia nos botões
             break;
             
         }
@@ -441,6 +455,14 @@ public class TelaJogo extends javax.swing.JFrame {
                 lblMsg.setText("Eles foram embora.");
                 QtPessoas-=6;
             break;
+            case 13:    //Historia
+                lblMsg.setText("Conseguimos salvar todos!");
+                QtAlimentos-=10;
+            break;
+            case 14:    //Historia
+                lblMsg.setText("o forasteiro é grato.");
+                QtPessoas+=1;
+            break;
             
         }
         Jogo();
@@ -453,6 +475,15 @@ public class TelaJogo extends javax.swing.JFrame {
             case 12:    //Inicio Historia
                 lblMsg.setText("Alguns deles ficaram.");
                 QtPessoas-=3;
+            break;
+            case 13:    //Historia
+                lblMsg.setText("Algumas pessoas morreram, mas matamos o tigre");
+                QtPessoas-=3;
+                QtAlimentos+=10;
+            break;
+            case 14:    //Historia
+                lblMsg.setText("Ok Sr.");
+                QtPessoas+=1;
             break;
         }
         Jogo();
@@ -472,6 +503,15 @@ public class TelaJogo extends javax.swing.JFrame {
             case 12:    //Historia
                 lblMsg.setText("Eles ficaram, mas estão reclamando.");
             break;
+            case 13:    //Historia
+                lblMsg.setText("<html>O tigre foi embora,<br/> mas matou algumas pessoas.</html>");
+                QtPessoas-=5;
+                QtAlimentos-=3;
+            break;
+            case 14:    //Historia
+                lblMsg.setText("<html>Ele saiu reclamando e<br/>falou que deve se vingar.</html>");
+            break;
+            
         }
         Jogo();
     }//GEN-LAST:event_btnOp3ActionPerformed
