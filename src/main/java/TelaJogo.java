@@ -131,6 +131,8 @@ public class TelaJogo extends javax.swing.JFrame {
         } else {
         Historia();
         }
+        
+        //analise das variaveis
         System.out.println("VtPrimeirosPassos "+VtPrimeirosPassos);
         System.out.println("Vt "+Vt);
 
@@ -439,6 +441,7 @@ public class TelaJogo extends javax.swing.JFrame {
             break;      //fim do tutorial
             case 11:    //Inicio Historia
                 lblMsg.setText("<html>Muito bem meu lorde.<br/>Eles foram embora<html/>");
+                QtPessoas-=6;
             break;
         }
         Jogo();
