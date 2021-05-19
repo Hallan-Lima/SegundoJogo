@@ -1,3 +1,4 @@
+import Construtor.ConstrutorJogo;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
@@ -10,22 +11,18 @@ public class TelaJogo extends javax.swing.JFrame {
     int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias;
     int a=10000000, b=4000;     // variaveis do delay
 
-    double c= QtVilas+QtPessoas;
-
+    String nome;
     
-   /*  long totalMilisegundos = System.currentTimeMillis()-10800000;
-    long totalSegundos = totalMilisegundos / 1000;
-    long segundoAtual = totalSegundos % 60;
-    long totalMinutos = totalSegundos / 60;
-    long minutoAtual = totalMinutos % 60;
-    long totalHora = totalMinutos / 60;
-    long horaAtual = totalHora % 24; */
-
     Random aleatorio = new Random();    //gerador de numeros
                   
     public TelaJogo() {
         initComponents();
         Jogo();
+    }
+    
+    public void exportaNome(ConstrutorJogo construtor) {
+        lblNomeReino.setText(construtor.getNomeReino());
+        nome = construtor.getNome();
     }
     
     public void ContagemTempo(){
@@ -36,7 +33,9 @@ public class TelaJogo extends javax.swing.JFrame {
             @Override
             public void run(){
                QtDias++;
-               QtAlimentos-=(((QtVilas+QtPessoas)/QtAlimentos)*1000);   //valor gerado proporcional a quantidade de pessoas e vilas
+               
+               Valor = aleatorio.nextInt((QtAlimentos/10)+(QtPessoas/10));
+               QtAlimentos -= Valor;
             }
         };
         timer.schedule(tarea, 0, 500000);
@@ -85,7 +84,7 @@ public class TelaJogo extends javax.swing.JFrame {
     }
  
     void PrimeirosPassos(){
-       
+        
         if (Vt==2) {
             btnOp1.setText("Ok");
             lblMsg.setText("<html>No canto direito podemos observa<br/> a quantidade de pessoas que <br/>temos em nossa vila.<br/><br/> Atualmente temos 10 Pessoas.</html>");
@@ -134,6 +133,7 @@ public class TelaJogo extends javax.swing.JFrame {
         btnOp1.setText("Sim");
         btnOp3.setText("Não");
         Vt=1;           //variavel para tutorial
+        
         }
     }
    
@@ -143,7 +143,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         switch (Valor) {
             case 1:
-                lblMsg.setText("<html>Ola meu Sr.<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
+                lblMsg.setText("<html>Ola meu Sr."+nome+"<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
                 btnOp1.setText("Sim");
                 btnOp3.setText("Não");
                 Vt=11;              //Numero da historia nos botões
@@ -182,7 +182,7 @@ public class TelaJogo extends javax.swing.JFrame {
     }
 
     void Jogo(){
-
+                
         if (QtPessoas <= 0 || QtAlimentos <=0 || QtVilas <= 0) {
             lblMsg.setText("<html>Infelizmente seu reino <br/> não deu certo <br/><br/> Boa sorte na proxima! </html>");
             LimparOp();
@@ -204,7 +204,7 @@ public class TelaJogo extends javax.swing.JFrame {
         } else {
         
         Historia();
-        ContagemTempo(); // fazer contagem dos dias
+        ContagemTempo(); // fazer contagem dos dias e diminuir o alimento
 
         }
         
@@ -216,7 +216,6 @@ public class TelaJogo extends javax.swing.JFrame {
         System.out.println("Vt "+Vt);
         System.out.println("Variavel "+Valor);
         */
-        System.out.println(c);
         System.out.println("----/Fim/-----");
         }
 
@@ -237,6 +236,7 @@ public class TelaJogo extends javax.swing.JFrame {
         btnOp1 = new javax.swing.JButton();
         btnOp2 = new javax.swing.JButton();
         btnOp3 = new javax.swing.JButton();
+        lblNomeReino = new javax.swing.JLabel();
         lblPessoas = new javax.swing.JLabel();
         lblValoresPessoas = new javax.swing.JLabel();
         lblAlimentos = new javax.swing.JLabel();
@@ -299,17 +299,23 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         });
 
+        lblNomeReino.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        lblNomeReino.setForeground(new java.awt.Color(255, 255, 255));
+        lblNomeReino.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblNomeReino.setText("Nome do Reino");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(lblMsg, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOp1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOp2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(lblNomeReino, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblMsg, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOp1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnOp2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btnOp3, javax.swing.GroupLayout.PREFERRED_SIZE, 282, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -318,7 +324,9 @@ public class TelaJogo extends javax.swing.JFrame {
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(lblNomeReino, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblMsg, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnOp1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -709,6 +717,7 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JLabel lblDias;
     private javax.swing.JLabel lblMsg;
     private javax.swing.JLabel lblMsgStatus;
+    private javax.swing.JLabel lblNomeReino;
     private javax.swing.JLabel lblPessoas;
     private javax.swing.JLabel lblRiquezas;
     private javax.swing.JLabel lblSoldados;
