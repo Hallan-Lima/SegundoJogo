@@ -9,6 +9,9 @@ public class TelaJogo extends javax.swing.JFrame {
     
     int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias;
     int a=10000000, b=4000;     // variaveis do delay
+
+    double c= QtVilas+QtPessoas;
+
     
    /*  long totalMilisegundos = System.currentTimeMillis()-10800000;
     long totalSegundos = totalMilisegundos / 1000;
@@ -32,10 +35,11 @@ public class TelaJogo extends javax.swing.JFrame {
         TimerTask tarea = new TimerTask(){
             @Override
             public void run(){
-               // QtDias++;
+               QtDias++;
+               QtAlimentos-=(((QtVilas+QtPessoas)/QtAlimentos)*1000);   //valor gerado proporcional a quantidade de pessoas e vilas
             }
         };
-        timer.schedule(tarea, 0, 10000);
+        timer.schedule(tarea, 0, 500000);
     }
     
     void IniciarAtualizar(){
@@ -58,6 +62,9 @@ public class TelaJogo extends javax.swing.JFrame {
             btnSair.setText("Sair do Jogo");
             
         } else {
+            if (QtAlimentos > 100) {
+                QtAlimentos=100;
+            }
 
             lblValoresAlimentos.setText(Integer.toString(QtAlimentos)+"%");
             lblValoresPessoas.setText(Integer.toString(QtPessoas));
@@ -132,7 +139,7 @@ public class TelaJogo extends javax.swing.JFrame {
    
     void Historia(){
 
-        Valor = aleatorio.nextInt(3)+1;
+        Valor = aleatorio.nextInt(5)+1;
 
         switch (Valor) {
             case 1:
@@ -161,6 +168,13 @@ public class TelaJogo extends javax.swing.JFrame {
                 btnOp2.setText("Fica de olho nele");
                 btnOp3.setText("Não quero ele aqui");
                 Vt=14;              //Numero da historia nos botões
+            break;
+            case 5:
+                lblMsg.setText("<html>Meu Sr.<br/>Uma vila vizinha esta<br/>querendo forma uma aliança<br/><br/>Devemos forma uma aliança?</html>");
+                btnOp1.setText("Sim, vamos fazer uma festa!");
+                btnOp2.setText("Ok");
+                btnOp3.setText("Não");
+                Vt=15;              //Numero da historia nos botões
             break;
             
         }
@@ -197,9 +211,12 @@ public class TelaJogo extends javax.swing.JFrame {
         //analise das variaveis
         debug++;
         System.out.println("----/Inicio/----- "+debug);
+        /*
         System.out.println("VtPrimeirosPassos "+VtPrimeirosPassos);
         System.out.println("Vt "+Vt);
         System.out.println("Variavel "+Valor);
+        */
+        System.out.println(c);
         System.out.println("----/Fim/-----");
         }
 
@@ -541,6 +558,10 @@ public class TelaJogo extends javax.swing.JFrame {
                 lblMsg.setText("o forasteiro é grato.");
                 QtPessoas+=1;
             break;
+            case 15:    //Historia
+                lblMsg.setText("<html>A vila e as pessoas<br/>Ficaram feliz!<html/>");
+                QtAlimentos-=10;
+            break;
             
         }
         LimparOp();
@@ -572,6 +593,10 @@ public class TelaJogo extends javax.swing.JFrame {
                 lblMsg.setText("Ok Sr.");
                 QtPessoas+=1;
             break;
+            case 15:    //Historia
+                lblMsg.setText("Otimo, vamos avisar eles");
+            break;
+
         }
     
          LimparOp();
@@ -609,6 +634,9 @@ public class TelaJogo extends javax.swing.JFrame {
             break;
             case 14:    //Historia
                 lblMsg.setText("<html>Ele saiu reclamando e<br/>falou que deve se vingar.</html>");
+            break;
+            case 15:    //Historia
+                lblMsg.setText("<html>O lider da vila,<br/> não entendeu o motivo da recusa.<br/> Mas devemos ficar bem.</html>");
             break;
             
         }

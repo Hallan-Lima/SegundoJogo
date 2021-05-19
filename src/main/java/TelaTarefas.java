@@ -50,6 +50,8 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel1.setText("jLabel1");
 
+        jSpinner1.setModel(new javax.swing.SpinnerNumberModel(0, 0, 7, 1));
+
         jLabel2.setText("jLabel1");
 
         jLabel3.setText("jLabel1");
