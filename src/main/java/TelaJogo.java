@@ -12,7 +12,7 @@ import java.util.TimerTask;
 public class TelaJogo extends javax.swing.JFrame {
     
     int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias;
-    
+
     int StatusTristezaPessoas,	StatusTristezaAlimentos, StatusTristezaRiquezas,	StatusTristezaSoldados,	StatusRaivaPessoas,	StatusRaivaRiquezas,	StatusRaivaArmas,	StatusRaivaSoldados,	StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	StatusFelicidadeSoldados, StatusSoma, sentimento10, sentimento20, sentimento30, sentimento40, sentimento50, StatusFelicidade, StatusTristeza, StatusRaiva, QtRodada;
 
     int a=10000000, b=4000;     // variaveis do delay
@@ -26,12 +26,12 @@ public class TelaJogo extends javax.swing.JFrame {
         Jogo();
     }
     
-    public void exportaNome(ConstrutorJogo construtor) {
+    public void exportaNome(ConstrutorJogo construtor) {            //pega o nome do usuario
         lblNomeReino.setText(construtor.getNomeReino());
         nome = construtor.getNome();
     }
     
-    public void ContagemTempo(){
+    public void ContagemTempo(){                                    
 
         QtRodada++;
 
