@@ -9,6 +9,8 @@ import java.util.TimerTask;
 public class TelaJogo extends javax.swing.JFrame {
     
     int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias;
+    int StatusTristezaPessoas,	StatusTristezaAlimentos, StatusTristezaRiquezas,	StatusTristezaSoldados,	StatusRaivaPessoas,	StatusRaivaRiquezas,	StatusRaivaArmas,	StatusRaivaSoldados,	StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	StatusFelicidadeSoldados, StatusSoma, sentimento10, sentimento20, sentimento30, sentimento40, sentimento50;
+
     int a=10000000, b=4000;     // variaveis do delay
 
     String nome;
@@ -44,6 +46,21 @@ public class TelaJogo extends javax.swing.JFrame {
     void IniciarAtualizar(){
 
         if (VtPrimeirosPassos==0) {
+
+            StatusTristezaPessoas = 0;
+            StatusTristezaAlimentos = 0;
+            StatusTristezaRiquezas = 0;
+            StatusTristezaSoldados = 0;
+            StatusRaivaPessoas = 0;
+            StatusRaivaRiquezas = 0;
+            StatusRaivaArmas = 0;
+            StatusRaivaSoldados = 0;
+            StatusFelicidadePessoas = 100;
+            StatusFelicidadeAlimentos = 100;
+            StatusFelicidadeVilas = 100;
+            StatusFelicidadeRiquezas = 100;
+            StatusFelicidadeArmas = 100;
+            StatusFelicidadeSoldados = 0;
             
             QtAlimentos = 100;
             QtPessoas = 10;
@@ -73,6 +90,7 @@ public class TelaJogo extends javax.swing.JFrame {
             lblValoresVilas.setText(Integer.toString(QtVilas));
             lblValoresDias.setText(Integer.toString(QtDias));
         }
+        Status();
         LimparOp();
         
     }
@@ -140,44 +158,88 @@ public class TelaJogo extends javax.swing.JFrame {
     void Historia(){
 
         Valor = aleatorio.nextInt(5)+1;
+        sentimento10 = (aleatorio.nextInt(10));
+        sentimento20 = (aleatorio.nextInt(20));
+        sentimento30 = (aleatorio.nextInt(30));
+        sentimento40 = (aleatorio.nextInt(40));
+        sentimento50 = (aleatorio.nextInt(50));
 
         switch (Valor) {
             case 1:
-                lblMsg.setText("<html>Ola meu Sr."+nome+"<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
+                lblMsg.setText("<html>Ola Sr."+nome+"<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
                 btnOp1.setText("Sim");
                 btnOp3.setText("Não");
                 Vt=11;              //Numero da historia nos botões
             break;
             case 2:
-                lblMsg.setText("<html>Ola meu Sr.<br/>um grupo de pessoas estão<br/>indo embora, o que devemos fazer?</html>");
+                lblMsg.setText("<html>Ola Sr."+nome+"<br/>um grupo de pessoas estão<br/>indo embora,<br/><br/>o que devemos fazer?</html>");
                 btnOp1.setText("Deixar eles irem");
                 btnOp2.setText("Pedir para ficar");
                 btnOp3.setText("Não deixar ninguem ir");
                 Vt=12;              //Numero da historia nos botões
             break;
             case 3:
-                lblMsg.setText("<html>Meu Sr.<br/>um tigre esta atacando a vila, <br/>o que devemos fazer?</html>");
+                lblMsg.setText("<html>Sr."+nome+"<br/>um tigre esta atacando a vila,<br/><br/>o que devemos fazer?</html>");
                 btnOp1.setText("O importante é proteger as pessoas!");
                 btnOp2.setText("O importante é matar o tigre");
                 btnOp3.setText("Espera ele ir embora");
                 Vt=13;              //Numero da historia nos botões
             break;
             case 4:
-                lblMsg.setText("<html>Meu Sr.<br/>um forasteiro chegou na vila<br/>pedindo para ficar</html>");
+                lblMsg.setText("<html>Sr."+nome+"<br/>um forasteiro chegou na vila<br/>pedindo para ficar</html>");
                 btnOp1.setText("Pode deixar ele fica");
                 btnOp2.setText("Fica de olho nele");
                 btnOp3.setText("Não quero ele aqui");
                 Vt=14;              //Numero da historia nos botões
             break;
             case 5:
-                lblMsg.setText("<html>Meu Sr.<br/>Uma vila vizinha esta<br/>querendo forma uma aliança<br/><br/>Devemos forma uma aliança?</html>");
+                lblMsg.setText("<html>Sr."+nome+"<br/>Uma vila vizinha esta<br/>querendo formar uma aliança<br/><br/>Devemos formar uma aliança?</html>");
                 btnOp1.setText("Sim, vamos fazer uma festa!");
                 btnOp2.setText("Ok");
                 btnOp3.setText("Não");
                 Vt=15;              //Numero da historia nos botões
             break;
-            
+            case 6:
+                lblMsg.setText("<html>Sr."+nome+"<br/>Algumas pessoas da vila<br/>querem formar uma aliança<br/>com uma vila vizinha,<br/><br/>Devemos formar uma aliança?</html>");
+                btnOp1.setText("Claro, mande um presente!");
+                btnOp2.setText("Sim");
+                btnOp3.setText("Não");
+                Vt=16;              //Numero da historia nos botões
+            break;
         }
+    }
+
+    void Status(){
+
+        StatusSoma = (StatusTristezaPessoas+	StatusTristezaAlimentos+ StatusTristezaRiquezas+	StatusTristezaSoldados+	StatusRaivaPessoas+ StatusRaivaRiquezas+	StatusRaivaArmas+	StatusRaivaSoldados+	StatusFelicidadePessoas+	StatusFelicidadeAlimentos+	StatusFelicidadeVilas+	StatusFelicidadeRiquezas+	StatusFelicidadeArmas+	StatusFelicidadeSoldados)/5;
+
+        if (StatusSoma >= 100) {
+            lblMsgStatus.setText("Todos estão alegres!");
+        } else {
+            if (StatusSoma < 100 && StatusSoma >= 80) {
+                lblMsgStatus.setText("O povo esta Feliz");
+            } else {
+                if (StatusSoma < 80 && StatusSoma >= 60 ) {
+                    lblMsgStatus.setText("Estamos bem");
+                } else {
+                    if (StatusSoma < 60 && StatusSoma >= 40 ) {
+                        lblMsgStatus.setText("Estamos levando");
+                    } else {
+                        if (StatusSoma < 40 && StatusSoma >= 25) {
+                            lblMsgStatus.setText("Cuidado!");
+                        } else {
+                            if (StatusSoma < 25 && StatusSoma >= 0) {
+                                 lblMsgStatus.setText("Crise em iminencia !!!");
+                            } else { 
+
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        
 
     }
 
@@ -216,6 +278,8 @@ public class TelaJogo extends javax.swing.JFrame {
         System.out.println("Vt "+Vt);
         System.out.println("Variavel "+Valor);
         */
+        System.out.println(StatusSoma);
+
         System.out.println("----/Fim/-----");
         }
 
@@ -249,7 +313,6 @@ public class TelaJogo extends javax.swing.JFrame {
         lblValoresSoldados = new javax.swing.JLabel();
         lblArmas = new javax.swing.JLabel();
         lblValoresArmas = new javax.swing.JLabel();
-        lblStatus = new javax.swing.JLabel();
         lblMsgStatus = new javax.swing.JLabel();
         btnSair = new javax.swing.JButton();
         btnCentral = new javax.swing.JButton();
@@ -378,9 +441,6 @@ public class TelaJogo extends javax.swing.JFrame {
         lblValoresArmas.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblValoresArmas.setText("-");
 
-        lblStatus.setForeground(new java.awt.Color(255, 255, 255));
-        lblStatus.setText("Status");
-
         lblMsgStatus.setForeground(new java.awt.Color(255, 255, 255));
         lblMsgStatus.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         lblMsgStatus.setText("-");
@@ -430,17 +490,15 @@ public class TelaJogo extends javax.swing.JFrame {
                         .addComponent(lblValoresArmas, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblMsgStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(btnCentral, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
                         .addComponent(lblDias, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblValoresDias, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(lblValoresDias, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(lblMsgStatus, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -478,9 +536,7 @@ public class TelaJogo extends javax.swing.JFrame {
                             .addComponent(lblValoresArmas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(lblArmas, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(lblMsgStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(lblMsgStatus, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(lblValoresDias, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -553,22 +609,38 @@ public class TelaJogo extends javax.swing.JFrame {
             case 11:    //Inicio Historia
                 lblMsg.setText("<html>Muito bem meu lorde.<br/>Eles ficam gratos!<html/>");
                 QtPessoas+=6;
+                StatusFelicidadePessoas += sentimento30;
             break;
             case 12:    //Historia
                 lblMsg.setText("Eles foram embora.");
                 QtPessoas-=6;
+                StatusTristezaPessoas -= sentimento30;
             break;
             case 13:    //Historia
                 lblMsg.setText("Conseguimos salvar todos!");
                 QtAlimentos-=10;
+                StatusFelicidadePessoas += sentimento10;
             break;
             case 14:    //Historia
                 lblMsg.setText("o forasteiro é grato.");
                 QtPessoas+=1;
+                StatusFelicidadePessoas += sentimento10;
             break;
             case 15:    //Historia
                 lblMsg.setText("<html>A vila e as pessoas<br/>Ficaram feliz!<html/>");
                 QtAlimentos-=10;
+            break;
+            case 16:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. enviamos comida e a <br/>outra vila ficou muito feliz<br/> com a aliança, mandaram <br/> alguns soldados em retribuição<br/> da nova amizade!<html/>");
+                    QtAlimentos-=10;
+                    StatusFelicidadePessoas += sentimento10;
+                    QtSoldados += (aleatorio.nextInt(5)+2);
+                } else {
+                lblMsg.setText("<html>Enviamos comida!<br/>Todos ficaram felizes!<html/>");
+                QtAlimentos-=10;
+                StatusFelicidadePessoas += sentimento10;
+                }
             break;
             
         }
@@ -591,18 +663,34 @@ public class TelaJogo extends javax.swing.JFrame {
             case 12:    //Inicio Historia
                 lblMsg.setText("Alguns deles ficaram.");
                 QtPessoas-=3;
+                StatusTristezaPessoas -= sentimento20;
+                StatusRaivaPessoas -= sentimento20;
             break;
             case 13:    //Historia
-                lblMsg.setText("Pessoas morreram, mas matamos o tigre");
+                lblMsg.setText("Pessoas morreram, mas matamos o tigre.");
                 QtPessoas-=3;
                 QtAlimentos+=10;
+                StatusTristezaPessoas -= sentimento20;
+                StatusFelicidadePessoas += sentimento30;
+                StatusRaivaPessoas -= sentimento20;
             break;
             case 14:    //Historia
                 lblMsg.setText("Ok Sr.");
                 QtPessoas+=1;
+                StatusRaivaPessoas -= sentimento20;
             break;
             case 15:    //Historia
-                lblMsg.setText("Otimo, vamos avisar eles");
+                lblMsg.setText("Otimo, vamos avisar eles.");
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    StatusFelicidadePessoas += sentimento10;
+                } else {
+                    StatusRaivaPessoas -= sentimento10;
+                    StatusTristezaPessoas -= sentimento10;
+                }
+            break;
+            case 16:    //Historia
+                lblMsg.setText("Ok Sr.");
+                StatusFelicidadePessoas += sentimento10;
             break;
 
         }
@@ -630,23 +718,33 @@ public class TelaJogo extends javax.swing.JFrame {
             break;      //fim do tutorial
             case 11:    //Inicio Historia
                 lblMsg.setText("<html>Muito bem meu lorde.<br/>Eles foram embora<html/>");
-                QtPessoas-=6;
+                StatusTristezaPessoas -= (sentimento50+10);
             break;
             case 12:    //Historia
                 lblMsg.setText("Eles ficaram, mas estão reclamando.");
+                StatusRaivaPessoas -= (sentimento50+10);
             break;
             case 13:    //Historia
                 lblMsg.setText("<html>O tigre foi embora,<br/> mas matou algumas pessoas.</html>");
                 QtPessoas-=5;
                 QtAlimentos-=3;
+                StatusTristezaPessoas -= sentimento30;
+                StatusRaivaPessoas -= sentimento20;
             break;
             case 14:    //Historia
                 lblMsg.setText("<html>Ele saiu reclamando e<br/>falou que deve se vingar.</html>");
+                StatusRaivaPessoas -= sentimento40;
             break;
             case 15:    //Historia
                 lblMsg.setText("<html>O lider da vila,<br/> não entendeu o motivo da recusa.<br/> Mas devemos ficar bem.</html>");
+                StatusRaivaPessoas -= sentimento30;
+                StatusRaivaSoldados -= sentimento10;
             break;
-            
+            case 16:    //Historia
+                lblMsg.setText("Algumas pessoas não gostaram.");
+                StatusRaivaPessoas -= sentimento30;
+                StatusTristezaPessoas -= sentimento20;
+            break;
         }
  
          LimparOp();
@@ -721,7 +819,6 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JLabel lblPessoas;
     private javax.swing.JLabel lblRiquezas;
     private javax.swing.JLabel lblSoldados;
-    private javax.swing.JLabel lblStatus;
     private javax.swing.JLabel lblValoresAlimentos;
     private javax.swing.JLabel lblValoresArmas;
     private javax.swing.JLabel lblValoresDias;
