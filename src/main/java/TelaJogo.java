@@ -5,11 +5,14 @@ import java.util.TimerTask;
 
 /**
  * @author hlima
+ * 
+ * Ctrl + Alt + K = para marcação
+ * 
  */
 public class TelaJogo extends javax.swing.JFrame {
     
     int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias;
-    int StatusTristezaPessoas,	StatusTristezaAlimentos, StatusTristezaRiquezas,	StatusTristezaSoldados,	StatusRaivaPessoas,	StatusRaivaRiquezas,	StatusRaivaArmas,	StatusRaivaSoldados,	StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	StatusFelicidadeSoldados, StatusSoma, sentimento10, sentimento20, sentimento30, sentimento40, sentimento50;
+    int StatusTristezaPessoas,	StatusTristezaAlimentos, StatusTristezaRiquezas,	StatusTristezaSoldados,	StatusRaivaPessoas,	StatusRaivaRiquezas,	StatusRaivaArmas,	StatusRaivaSoldados,	StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	StatusFelicidadeSoldados, StatusSoma, sentimento10, sentimento20, sentimento30, sentimento40, sentimento50, StatusFelicidade, StatusTristeza, StatusRaiva, QtRodada;
 
     int a=10000000, b=4000;     // variaveis do delay
 
@@ -28,16 +31,19 @@ public class TelaJogo extends javax.swing.JFrame {
     }
     
     public void ContagemTempo(){
-    
+
+        QtRodada++;
+        QtDias = (QtRodada >= 7)?QtDias++:QtDias;
+
         Timer timer = new Timer();
         
         TimerTask tarea = new TimerTask(){
             @Override
             public void run(){
-               QtDias++;
-               
-               Valor = aleatorio.nextInt((QtAlimentos/10)+(QtPessoas/10));
-               QtAlimentos -= Valor;
+                
+            Valor = aleatorio.nextInt((QtAlimentos/10)+(QtPessoas/10));
+            QtAlimentos -= Valor;
+
             }
         };
         timer.schedule(tarea, 0, 500000);
@@ -78,9 +84,8 @@ public class TelaJogo extends javax.swing.JFrame {
             btnSair.setText("Sair do Jogo");
             
         } else {
-            if (QtAlimentos > 100) {
-                QtAlimentos=100;
-            }
+            
+            QtAlimentos = (QtAlimentos > 100)? 100: QtAlimentos;                //validando valor dentro da variavel
 
             lblValoresAlimentos.setText(Integer.toString(QtAlimentos)+"%");
             lblValoresPessoas.setText(Integer.toString(QtPessoas));
@@ -91,8 +96,7 @@ public class TelaJogo extends javax.swing.JFrame {
             lblValoresDias.setText(Integer.toString(QtDias));
         }
         Status();
-        LimparOp();
-        
+        LimparOp();        
     }
         
     void LimparOp(){            // limpar as opções 
@@ -158,11 +162,11 @@ public class TelaJogo extends javax.swing.JFrame {
     void Historia(){
 
         Valor = aleatorio.nextInt(5)+1;
-        sentimento10 = (aleatorio.nextInt(10));
-        sentimento20 = (aleatorio.nextInt(20));
-        sentimento30 = (aleatorio.nextInt(30));
-        sentimento40 = (aleatorio.nextInt(40));
-        sentimento50 = (aleatorio.nextInt(50));
+        sentimento10 = (aleatorio.nextInt(10)+5);
+        sentimento20 = (aleatorio.nextInt(20)+5);
+        sentimento30 = (aleatorio.nextInt(30)+5);
+        sentimento40 = (aleatorio.nextInt(40)+5);
+        sentimento50 = (aleatorio.nextInt(50)+5);
 
         switch (Valor) {
             case 1:
@@ -211,6 +215,48 @@ public class TelaJogo extends javax.swing.JFrame {
 
     void Status(){
 
+         //para diminuir aos poucos o valor
+        if (QtRodada > 7) {
+            StatusRaivaPessoas = (StatusRaivaPessoas < 0 )? StatusRaivaPessoas + sentimento10: StatusRaivaPessoas;     
+            StatusTristezaPessoas  =  (StatusTristezaPessoas  < 0) ? StatusTristezaPessoas  + sentimento10:StatusTristezaPessoas ;
+            StatusTristezaAlimentos  =  ( StatusTristezaAlimentos  < 0) ?  StatusTristezaAlimentos  + sentimento10: StatusTristezaAlimentos ;
+            StatusTristezaRiquezas  =  ( StatusTristezaRiquezas  < 0) ?  StatusTristezaRiquezas  + sentimento10: StatusTristezaRiquezas ;
+            StatusTristezaSoldados  =  ( StatusTristezaSoldados  < 0) ?  StatusTristezaSoldados  + sentimento10: StatusTristezaSoldados ;
+            StatusRaivaPessoas  =  ( StatusRaivaPessoas  < 0) ?  StatusRaivaPessoas  + sentimento10: StatusRaivaPessoas ;
+            StatusRaivaRiquezas  =  ( StatusRaivaRiquezas  < 0) ?  StatusRaivaRiquezas  + sentimento10: StatusRaivaRiquezas ;
+            StatusRaivaArmas  =  ( StatusRaivaArmas  < 0) ?  StatusRaivaArmas  + sentimento10: StatusRaivaArmas ;
+            StatusRaivaSoldados  =  ( StatusRaivaSoldados  < 0) ?  StatusRaivaSoldados  + sentimento10: StatusRaivaSoldados ;
+            StatusFelicidadePessoas  =  ( StatusFelicidadePessoas  > 50) ?  StatusFelicidadePessoas  - sentimento10: StatusFelicidadePessoas ;
+            StatusFelicidadeAlimentos  =  ( StatusFelicidadeAlimentos  > 50) ?  StatusFelicidadeAlimentos  - sentimento10: StatusFelicidadeAlimentos ;
+            StatusFelicidadeVilas  =  ( StatusFelicidadeVilas  > 50) ?  StatusFelicidadeVilas  - sentimento10: StatusFelicidadeVilas ;
+            StatusFelicidadeRiquezas  =  ( StatusFelicidadeRiquezas  > 50) ?  StatusFelicidadeRiquezas  - sentimento10: StatusFelicidadeRiquezas ;
+            StatusFelicidadeArmas  =  ( StatusFelicidadeArmas  > 50) ?  StatusFelicidadeArmas  - sentimento10: StatusFelicidadeArmas ;
+            StatusFelicidadeSoldados  =  ( StatusFelicidadeSoldados  > 50) ?  StatusFelicidadeSoldados  - sentimento10: StatusFelicidadeSoldados ;
+
+            QtRodada=0;                                                                
+        }
+        
+        // validando valor dentro da varial (não pode ser maior ou menor que 100)
+        StatusTristezaPessoas  =  (StatusTristezaPessoas  < (-100)) ? -100: StatusTristezaPessoas  ;
+        StatusTristezaAlimentos  =  ( StatusTristezaAlimentos  < (-100)) ? -100:  StatusTristezaAlimentos  ;
+        StatusTristezaRiquezas  =  ( StatusTristezaRiquezas  < (-100)) ? -100:  StatusTristezaRiquezas  ;
+        StatusTristezaSoldados  =  ( StatusTristezaSoldados  < (-100)) ? -100:  StatusTristezaSoldados  ;
+        StatusRaivaPessoas  =  ( StatusRaivaPessoas  < (-100)) ? -100:  StatusRaivaPessoas  ;
+        StatusRaivaRiquezas  =  ( StatusRaivaRiquezas  < (-100)) ? -100:  StatusRaivaRiquezas  ;
+        StatusRaivaArmas  =  ( StatusRaivaArmas  < (-100)) ? -100:  StatusRaivaArmas  ;
+        StatusRaivaSoldados  =  ( StatusRaivaSoldados  < (-100)) ? -100:  StatusRaivaSoldados  ;
+        StatusFelicidadePessoas  =  ( StatusFelicidadePessoas  >  100) ? 100:  StatusFelicidadePessoas  ;
+        StatusFelicidadeAlimentos  =  ( StatusFelicidadeAlimentos  >  100) ? 100:  StatusFelicidadeAlimentos  ;
+        StatusFelicidadeVilas  =  ( StatusFelicidadeVilas  >  100) ? 100:  StatusFelicidadeVilas  ;
+        StatusFelicidadeRiquezas  =  ( StatusFelicidadeRiquezas  >  100) ? 100:  StatusFelicidadeRiquezas  ;
+        StatusFelicidadeArmas  =  ( StatusFelicidadeArmas  >  100) ? 100:  StatusFelicidadeArmas  ;
+        StatusFelicidadeSoldados  =  ( StatusFelicidadeSoldados  >  100) ? 100:  StatusFelicidadeSoldados  ;
+
+
+        StatusFelicidade = (StatusFelicidadeAlimentos+StatusFelicidadeArmas+StatusFelicidadePessoas+StatusFelicidadeRiquezas+StatusFelicidadeSoldados+StatusFelicidadeVilas);
+        StatusRaiva = (StatusRaivaArmas+StatusRaivaPessoas+StatusRaivaRiquezas+StatusRaivaSoldados);
+        StatusTristeza = (StatusTristezaAlimentos+StatusTristezaPessoas+StatusTristezaRiquezas+StatusTristezaSoldados);
+        
         StatusSoma = (StatusTristezaPessoas+	StatusTristezaAlimentos+ StatusTristezaRiquezas+	StatusTristezaSoldados+	StatusRaivaPessoas+ StatusRaivaRiquezas+	StatusRaivaArmas+	StatusRaivaSoldados+	StatusFelicidadePessoas+	StatusFelicidadeAlimentos+	StatusFelicidadeVilas+	StatusFelicidadeRiquezas+	StatusFelicidadeArmas+	StatusFelicidadeSoldados)/5;
 
         if (StatusSoma >= 100) {
@@ -238,9 +284,6 @@ public class TelaJogo extends javax.swing.JFrame {
                 }
             }
         }
-
-        
-
     }
 
     void Jogo(){
@@ -273,13 +316,8 @@ public class TelaJogo extends javax.swing.JFrame {
         //analise das variaveis
         debug++;
         System.out.println("----/Inicio/----- "+debug);
-        /*
-        System.out.println("VtPrimeirosPassos "+VtPrimeirosPassos);
-        System.out.println("Vt "+Vt);
-        System.out.println("Variavel "+Valor);
-        */
-        System.out.println(StatusSoma);
-
+        System.out.println("Raiva "+StatusRaivaPessoas);
+        System.out.println("rodada "+QtRodada);
         System.out.println("----/Fim/-----");
         }
 
