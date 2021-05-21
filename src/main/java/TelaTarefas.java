@@ -10,7 +10,7 @@
  */
 public class TelaTarefas extends javax.swing.JFrame {
     
-    int QtTrabalhadores, QtDisponivel, Vt;
+    int QtTrabalhadores, QtDisponivel, Vt, QtSpinnerFazendas, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,ValorSpinner=1;
         
     TelaJogo tela = new TelaJogo ();
 
@@ -24,11 +24,12 @@ public class TelaTarefas extends javax.swing.JFrame {
         AtualizarTela();
     }
     void AtualizarTela(){
+
+        QtDisponivel =  QtTrabalhadores-(QtSpinnerFazendas+QtSpinnerConstrucao+QtSpinnerFerreiro+QtSpinnerSoldados+QtSpinnerExploradores+QtSpinnerMineradores+QtSpinnerFeiticaria+QtSpinnerCiencia);                                // atualizando valor do funcionario trabalhando   
         lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
-        System.out.println("Esta atualizando");
+        
     }
     void CalcularTrabalhadores(){
-
         QtDisponivel = tela.QtPessoas;
         QtTrabalhadores = tela.QtPessoas;
         System.out.println("esta execultando");    
@@ -76,7 +77,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel1.setText("Fazendas");
 
-        jspFazendas.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspFazendas.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspFazendas.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspFazendasStateChanged(evt);
@@ -85,14 +86,14 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel2.setText("Construção Civil");
 
-        jspConstrucao.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspConstrucao.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspConstrucao.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspConstrucaoStateChanged(evt);
             }
         });
 
-        jspFerreiro.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspFerreiro.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspFerreiro.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspFerreiroStateChanged(evt);
@@ -103,7 +104,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel4.setText("Treinamento de soldado");
 
-        jspSoldados.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspSoldados.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspSoldados.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspSoldadosStateChanged(evt);
@@ -115,7 +116,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         jLabel6.setText("Central de Tarefas");
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jspExploradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspExploradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspExploradores.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspExploradoresStateChanged(evt);
@@ -126,7 +127,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel8.setText("Mineradores");
 
-        jspMineradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspMineradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspMineradores.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspMineradoresStateChanged(evt);
@@ -135,7 +136,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel9.setText("Estudar feitiçaria");
 
-        jspEstudarFeiticaria.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspEstudarFeiticaria.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspEstudarFeiticaria.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspEstudarFeiticariaStateChanged(evt);
@@ -144,7 +145,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel10.setText("Estudar Ciencia e Tecnologia");
 
-        jspEstudarCienciaTec.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, 1));
+        jspEstudarCienciaTec.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
         jspEstudarCienciaTec.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspEstudarCienciaTecStateChanged(evt);
@@ -344,50 +345,54 @@ public class TelaTarefas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jspFazendasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspFazendasStateChanged
-
-        Vt = Integer.parseInt(jspFazendas.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        System.out.println("Antes Fazendas "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
-        QtDisponivel = QtTrabalhadores - Vt;                                // atualizando valor do funcionario trabalhando   
-        System.out.println("Depois Fazendas "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
+        QtSpinnerFazendas = Integer.parseInt(jspFazendas.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
         AtualizarTela();
-
-
-
     }//GEN-LAST:event_jspFazendasStateChanged
 
     private void jspConstrucaoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspConstrucaoStateChanged
-
-        Vt = Integer.parseInt(jspConstrucao.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        System.out.println("Antes Construcao "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
-
-        QtDisponivel = QtTrabalhadores - Vt;                                // atualizando valor do funcionario trabalhando   
-        System.out.println("depois Construcao "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
-
+        QtSpinnerConstrucao = Integer.parseInt(jspConstrucao.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
         AtualizarTela();
     }//GEN-LAST:event_jspConstrucaoStateChanged
 
     private void jspFerreiroStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspFerreiroStateChanged
         // TODO add your handling code here:
+        QtSpinnerFerreiro = Integer.parseInt(jspFerreiro.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
+        AtualizarTela();
     }//GEN-LAST:event_jspFerreiroStateChanged
 
     private void jspSoldadosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspSoldadosStateChanged
         // TODO add your handling code here:
+        QtSpinnerSoldados = Integer.parseInt(jspSoldados.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
+        AtualizarTela();
+
     }//GEN-LAST:event_jspSoldadosStateChanged
 
     private void jspExploradoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspExploradoresStateChanged
         // TODO add your handling code here:
+        QtSpinnerExploradores = Integer.parseInt(jspExploradores.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
+        AtualizarTela();
+
     }//GEN-LAST:event_jspExploradoresStateChanged
 
     private void jspMineradoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspMineradoresStateChanged
         // TODO add your handling code here:
+        QtSpinnerMineradores = Integer.parseInt(jspMineradores.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
+        AtualizarTela();
+
     }//GEN-LAST:event_jspMineradoresStateChanged
 
     private void jspEstudarFeiticariaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspEstudarFeiticariaStateChanged
         // TODO add your handling code here:
+        QtSpinnerFeiticaria = Integer.parseInt(jspEstudarFeiticaria.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
+        AtualizarTela();
+
     }//GEN-LAST:event_jspEstudarFeiticariaStateChanged
 
     private void jspEstudarCienciaTecStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspEstudarCienciaTecStateChanged
         // TODO add your handling code here:
+        QtSpinnerCiencia = Integer.parseInt(jspEstudarCienciaTec.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
+        AtualizarTela();
+    
     }//GEN-LAST:event_jspEstudarCienciaTecStateChanged
 
     /**
