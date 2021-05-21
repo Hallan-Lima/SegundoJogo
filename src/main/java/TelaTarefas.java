@@ -25,10 +25,13 @@ public class TelaTarefas extends javax.swing.JFrame {
     }
     void AtualizarTela(){
         lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
+        System.out.println("Esta atualizando");
     }
     void CalcularTrabalhadores(){
 
+        QtDisponivel = tela.QtPessoas;
         QtTrabalhadores = tela.QtPessoas;
+        System.out.println("esta execultando");    
     }
 
     /**
@@ -341,15 +344,26 @@ public class TelaTarefas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jspFazendasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspFazendasStateChanged
-        AtualizarTela();
+
         Vt = Integer.parseInt(jspFazendas.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        QtDisponivel = QtTrabalhadores-Vt;                                // atualizando valor do funcionario trabalhando   
+        System.out.println("Antes Fazendas "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
+        QtDisponivel = QtTrabalhadores - Vt;                                // atualizando valor do funcionario trabalhando   
+        System.out.println("Depois Fazendas "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
+        AtualizarTela();
+
+
+
     }//GEN-LAST:event_jspFazendasStateChanged
 
     private void jspConstrucaoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspConstrucaoStateChanged
-        AtualizarTela();
+
         Vt = Integer.parseInt(jspConstrucao.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        QtDisponivel = QtTrabalhadores-Vt;                                // atualizando valor do funcionario trabalhando   
+        System.out.println("Antes Construcao "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
+
+        QtDisponivel = QtTrabalhadores - Vt;                                // atualizando valor do funcionario trabalhando   
+        System.out.println("depois Construcao "+QtDisponivel +" = "+ Vt +" - "+ QtTrabalhadores);
+
+        AtualizarTela();
     }//GEN-LAST:event_jspConstrucaoStateChanged
 
     private void jspFerreiroStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspFerreiroStateChanged
