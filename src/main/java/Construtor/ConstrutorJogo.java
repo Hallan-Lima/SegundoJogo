@@ -9,10 +9,15 @@ package Construtor;
  *
  * @author hlima
  */
+
 public class ConstrutorJogo {
     
     private String nome;
     private String nomeReino;
+    private int QtTrabalhadores;
+
+    private int QtSpinnerFazendas;
+
 
     /**
      * @return the nome
@@ -42,4 +47,31 @@ public class ConstrutorJogo {
         this.nomeReino = nomeReino;
     }
     
+      /**
+     * @return the QtTrabalhadores
+     */
+    public int getQtTrabalhadores() {
+        return QtTrabalhadores;
+    }
+
+    /**
+     * @param QtTrabalhadores the QtTrabalhadores to set
+     */
+    public void setQtTrabalhadores(int QtTrabalhadores) {
+        this.QtTrabalhadores = QtTrabalhadores;
+    }
+
+    /**
+     * @return the QtSpinnerFazendas
+     */
+    public int getQtSpinnerFazendas() {
+        return QtSpinnerFazendas;
+    }
+
+    /**
+     * @param QtSpinnerFazendas the QtSpinnerFazendas to set
+     */
+    public void setQtSpinnerFazendas(int QtSpinnerFazendas) {
+        this.QtSpinnerFazendas = QtSpinnerFazendas;
+    }
 }

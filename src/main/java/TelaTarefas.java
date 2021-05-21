@@ -1,3 +1,7 @@
+import javax.sound.sampled.SourceDataLine;
+
+import Construtor.ConstrutorJogo;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -13,6 +17,7 @@ public class TelaTarefas extends javax.swing.JFrame {
     int QtTrabalhadores, QtDisponivel, Vt, QtSpinnerFazendas, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,ValorSpinner=1;
         
     TelaJogo tela = new TelaJogo ();
+    ConstrutorJogo construtor = new ConstrutorJogo();
 
 
     /**
@@ -20,19 +25,15 @@ public class TelaTarefas extends javax.swing.JFrame {
      */
     public TelaTarefas() {
         initComponents();
-        CalcularTrabalhadores();
-        AtualizarTela();
     }
+    public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
+        QtTrabalhadores = construtor.getQtTrabalhadores();
+    }
+
     void AtualizarTela(){
 
         QtDisponivel =  QtTrabalhadores-(QtSpinnerFazendas+QtSpinnerConstrucao+QtSpinnerFerreiro+QtSpinnerSoldados+QtSpinnerExploradores+QtSpinnerMineradores+QtSpinnerFeiticaria+QtSpinnerCiencia);                                // atualizando valor do funcionario trabalhando   
         lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
-        
-    }
-    void CalcularTrabalhadores(){
-        QtDisponivel = tela.QtPessoas;
-        QtTrabalhadores = tela.QtPessoas;
-        System.out.println("esta execultando");    
     }
 
     /**
@@ -77,7 +78,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel1.setText("Fazendas");
 
-        jspFazendas.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspFazendas.setModel(new javax.swing.SpinnerNumberModel(QtSpinnerFazendas, 0, 99, ValorSpinner));
         jspFazendas.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspFazendasStateChanged(evt);
@@ -86,14 +87,14 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel2.setText("Construção Civil");
 
-        jspConstrucao.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspConstrucao.setModel(new javax.swing.SpinnerNumberModel(QtSpinnerConstrucao, 0, 99, ValorSpinner));
         jspConstrucao.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspConstrucaoStateChanged(evt);
             }
         });
 
-        jspFerreiro.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspFerreiro.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
         jspFerreiro.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspFerreiroStateChanged(evt);
@@ -104,7 +105,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel4.setText("Treinamento de soldado");
 
-        jspSoldados.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspSoldados.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
         jspSoldados.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspSoldadosStateChanged(evt);
@@ -116,7 +117,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         jLabel6.setText("Central de Tarefas");
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jspExploradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspExploradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
         jspExploradores.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspExploradoresStateChanged(evt);
@@ -127,7 +128,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel8.setText("Mineradores");
 
-        jspMineradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspMineradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
         jspMineradores.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspMineradoresStateChanged(evt);
@@ -136,7 +137,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel9.setText("Estudar feitiçaria");
 
-        jspEstudarFeiticaria.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspEstudarFeiticaria.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
         jspEstudarFeiticaria.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspEstudarFeiticariaStateChanged(evt);
@@ -145,7 +146,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         jLabel10.setText("Estudar Ciencia e Tecnologia");
 
-        jspEstudarCienciaTec.setModel(new javax.swing.SpinnerNumberModel(0, 0, tela.QtPessoas, ValorSpinner));
+        jspEstudarCienciaTec.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
         jspEstudarCienciaTec.addChangeListener(new javax.swing.event.ChangeListener() {
             public void stateChanged(javax.swing.event.ChangeEvent evt) {
                 jspEstudarCienciaTecStateChanged(evt);
@@ -340,7 +341,11 @@ public class TelaTarefas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // fechar central de tarefas
+        construtor.setQtSpinnerFazendas(QtSpinnerFazendas);
+        tela.exportaNome(construtor);
         dispose();
+        System.out.println("Taf "+QtSpinnerFazendas);
+
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -11,7 +11,7 @@ import java.util.TimerTask;
  */
 public class TelaJogo extends javax.swing.JFrame {
     
-    int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias;
+    int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias, QtTrabalhadores,QtFazendas;
 
     int StatusTristezaPessoas,	StatusTristezaAlimentos, StatusTristezaRiquezas,	StatusTristezaSoldados,	StatusRaivaPessoas,	StatusRaivaRiquezas,	StatusRaivaArmas,	StatusRaivaSoldados,	StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	StatusFelicidadeSoldados, StatusSoma, sentimento10, sentimento20, sentimento30, sentimento40, sentimento50, StatusFelicidade, StatusTristeza, StatusRaiva, QtRodada;
 
@@ -20,7 +20,9 @@ public class TelaJogo extends javax.swing.JFrame {
     String nome;                // nome do jogador
     
     Random aleatorio = new Random();    //gerador de numeros
-                  
+    
+    ConstrutorJogo construtor = new ConstrutorJogo();
+
     public TelaJogo() {
         initComponents();
         Jogo();
@@ -29,6 +31,8 @@ public class TelaJogo extends javax.swing.JFrame {
     public void exportaNome(ConstrutorJogo construtor) {            //pega o nome do usuario
         lblNomeReino.setText(construtor.getNomeReino());
         nome = construtor.getNome();
+        QtFazendas = construtor.getQtSpinnerFazendas();
+        System.out.println("Jogo "+ QtFazendas);
     }
     
     public void ContagemTempo(){                                    
@@ -320,8 +324,7 @@ public class TelaJogo extends javax.swing.JFrame {
         //analise das variaveis
         debug++;
         System.out.println("----/Inicio/----- "+debug);
-        System.out.println("Raiva "+StatusRaivaPessoas);
-        System.out.println("rodada "+QtRodada);
+        System.out.println(QtFazendas);
         System.out.println("----/Fim/-----");
         }
 
@@ -804,7 +807,11 @@ public class TelaJogo extends javax.swing.JFrame {
 
     private void btnCentralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentralActionPerformed
         // Abrir Central de tarefas
-        TelaTarefas tela = new TelaTarefas();
+        construtor.setQtTrabalhadores(QtPessoas);      // pegar quantidade de pessoas
+        
+        TelaTarefas tela = new TelaTarefas();             // criando obj
+        tela.exportaTrabalhadores(construtor);               // enviar Quantidade de pessoas
+
         tela.setVisible(true);
     }//GEN-LAST:event_btnCentralActionPerformed
     
@@ -870,4 +877,6 @@ public class TelaJogo extends javax.swing.JFrame {
     private javax.swing.JLabel lblValoresVilas;
     private javax.swing.JLabel lblVilas;
     // End of variables declaration//GEN-END:variables
+
+  
 }
