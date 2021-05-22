@@ -137,9 +137,17 @@ public class TelaInicial extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Abrir tela do jogo
+
+        
         construtor.setNome(txtNome.getText());                 // pegar nome
         construtor.setNomeReino(txtNomeReino.getText());      // pegar nome reino
         
+        //if (txtNome.getText() == "") {
+         //   System.out.println("ok");
+        //} else {
+         //   System.out.println("nome "+txtNome.getText());
+        //}
+
         TelaJogo tela = new TelaJogo();             // criando obj
         tela.exportaNome(construtor);               // enviar nome
         
