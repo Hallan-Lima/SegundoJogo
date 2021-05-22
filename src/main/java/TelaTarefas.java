@@ -14,8 +14,12 @@ import Construtor.ConstrutorJogo;
  */
 public class TelaTarefas extends javax.swing.JFrame {
     
-    int QtTrabalhadores, QtDisponivel, Vt, QtSpinnerFazendas, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,ValorSpinner=1;
-        
+    int QtTrabalhadores, QtDisponivel, Vt, QtSpinnerFazendas=0, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,ValorSpinner=1;
+    
+    int VtCalcular;
+    
+    String VtCalcular2;
+    
     TelaJogo tela = new TelaJogo ();
     ConstrutorJogo construtor = new ConstrutorJogo();
 
@@ -29,13 +33,6 @@ public class TelaTarefas extends javax.swing.JFrame {
     public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
         QtTrabalhadores = construtor.getQtTrabalhadores();
     }
-
-    void AtualizarTela(){
-
-        QtDisponivel =  QtTrabalhadores-(QtSpinnerFazendas+QtSpinnerConstrucao+QtSpinnerFerreiro+QtSpinnerSoldados+QtSpinnerExploradores+QtSpinnerMineradores+QtSpinnerFeiticaria+QtSpinnerCiencia);                                // atualizando valor do funcionario trabalhando   
-        lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
-    }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -49,133 +46,282 @@ public class TelaTarefas extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jLayeredPane1 = new javax.swing.JLayeredPane();
         jLabel1 = new javax.swing.JLabel();
-        jspFazendas = new javax.swing.JSpinner();
         jLabel2 = new javax.swing.JLabel();
-        jspConstrucao = new javax.swing.JSpinner();
-        jspFerreiro = new javax.swing.JSpinner();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        jspSoldados = new javax.swing.JSpinner();
         jLabel6 = new javax.swing.JLabel();
-        jspExploradores = new javax.swing.JSpinner();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        jspMineradores = new javax.swing.JSpinner();
         jLabel9 = new javax.swing.JLabel();
-        jspEstudarFeiticaria = new javax.swing.JSpinner();
         jLabel10 = new javax.swing.JLabel();
-        jspEstudarCienciaTec = new javax.swing.JSpinner();
-        lblQtPessoasDisponiveis = new javax.swing.JLabel();
+        lblFazendasValor = new javax.swing.JLabel();
+        btnFazendaMenos = new javax.swing.JButton();
+        btnFazendaSoma = new javax.swing.JButton();
+        btnConstrucaoMenos = new javax.swing.JButton();
+        lblConstrucaoValor = new javax.swing.JLabel();
+        btnConstrucaoSoma = new javax.swing.JButton();
+        btnFerreirosSoma = new javax.swing.JButton();
+        lblFerreirosValor = new javax.swing.JLabel();
+        btnFerreirosMenos = new javax.swing.JButton();
+        btnSoldadoMenos = new javax.swing.JButton();
+        lblSoldadoValor = new javax.swing.JLabel();
+        btnExploradoresSoma = new javax.swing.JButton();
+        btnExploradoresMenos = new javax.swing.JButton();
+        lblExploradoresValor = new javax.swing.JLabel();
+        btnSoldadoSoma = new javax.swing.JButton();
+        btnCienciaTecMenos = new javax.swing.JButton();
+        lblCienciaTecValor = new javax.swing.JLabel();
+        btnCienciaTecSoma = new javax.swing.JButton();
+        btnMineradoresMenos = new javax.swing.JButton();
+        lblMineradoresValor = new javax.swing.JLabel();
+        btnMineradoresSoma = new javax.swing.JButton();
+        btnFeiticariaSoma = new javax.swing.JButton();
+        lblFeiticariaValor = new javax.swing.JLabel();
+        btnFeiticariaMenos = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
+        lblQtPessoasDisponiveis = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
 
         jPanel1.setBackground(new java.awt.Color(51, 51, 51));
 
+        jLayeredPane1.setForeground(new java.awt.Color(51, 153, 255));
+
+        jLabel1.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Fazendas");
 
-        jspFazendas.setModel(new javax.swing.SpinnerNumberModel(QtSpinnerFazendas, 0, 99, ValorSpinner));
-        jspFazendas.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspFazendasStateChanged(evt);
-            }
-        });
-
+        jLabel2.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Construção Civil");
 
-        jspConstrucao.setModel(new javax.swing.SpinnerNumberModel(QtSpinnerConstrucao, 0, 99, ValorSpinner));
-        jspConstrucao.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspConstrucaoStateChanged(evt);
-            }
-        });
-
-        jspFerreiro.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
-        jspFerreiro.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspFerreiroStateChanged(evt);
-            }
-        });
-
+        jLabel3.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Ferreiros");
 
+        jLabel4.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Treinamento de soldado");
 
-        jspSoldados.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
-        jspSoldados.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspSoldadosStateChanged(evt);
-            }
-        });
-
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(204, 204, 204));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("Central de Tarefas");
         jLabel6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jspExploradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
-        jspExploradores.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspExploradoresStateChanged(evt);
-            }
-        });
-
+        jLabel7.setFont(new java.awt.Font("Agency FB", 0, 24)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Exploradores");
 
+        jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Mineradores");
 
-        jspMineradores.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
-        jspMineradores.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspMineradoresStateChanged(evt);
-            }
-        });
-
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setForeground(new java.awt.Color(255, 255, 255));
         jLabel9.setText("Estudar feitiçaria");
 
-        jspEstudarFeiticaria.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
-        jspEstudarFeiticaria.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspEstudarFeiticariaStateChanged(evt);
+        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel10.setText("Ciencia e Tecnologia");
+
+        lblFazendasValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblFazendasValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFazendasValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblFazendasValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFazendasValor.setText("0");
+
+        btnFazendaMenos.setText("-");
+        btnFazendaMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFazendaMenosActionPerformed(evt);
             }
         });
 
-        jLabel10.setText("Estudar Ciencia e Tecnologia");
-
-        jspEstudarCienciaTec.setModel(new javax.swing.SpinnerNumberModel(0, 0, 99, ValorSpinner));
-        jspEstudarCienciaTec.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
-                jspEstudarCienciaTecStateChanged(evt);
+        btnFazendaSoma.setText("+");
+        btnFazendaSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFazendaSomaActionPerformed(evt);
             }
         });
 
-        lblQtPessoasDisponiveis.setBackground(new java.awt.Color(0, 0, 0));
-        lblQtPessoasDisponiveis.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        lblQtPessoasDisponiveis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblQtPessoasDisponiveis.setText("Quantidade de pessoas disponiveis");
+        btnConstrucaoMenos.setText("-");
+        btnConstrucaoMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConstrucaoMenosActionPerformed(evt);
+            }
+        });
+
+        lblConstrucaoValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblConstrucaoValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblConstrucaoValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblConstrucaoValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblConstrucaoValor.setText("0");
+
+        btnConstrucaoSoma.setText("+");
+        btnConstrucaoSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnConstrucaoSomaActionPerformed(evt);
+            }
+        });
+
+        btnFerreirosSoma.setText("+");
+        btnFerreirosSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFerreirosSomaActionPerformed(evt);
+            }
+        });
+
+        lblFerreirosValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblFerreirosValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFerreirosValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblFerreirosValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFerreirosValor.setText("0");
+
+        btnFerreirosMenos.setText("-");
+        btnFerreirosMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFerreirosMenosActionPerformed(evt);
+            }
+        });
+
+        btnSoldadoMenos.setText("-");
+        btnSoldadoMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSoldadoMenosActionPerformed(evt);
+            }
+        });
+
+        lblSoldadoValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblSoldadoValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblSoldadoValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblSoldadoValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblSoldadoValor.setText("0");
+
+        btnExploradoresSoma.setText("+");
+        btnExploradoresSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExploradoresSomaActionPerformed(evt);
+            }
+        });
+
+        btnExploradoresMenos.setText("-");
+        btnExploradoresMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnExploradoresMenosActionPerformed(evt);
+            }
+        });
+
+        lblExploradoresValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblExploradoresValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblExploradoresValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblExploradoresValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblExploradoresValor.setText("0");
+
+        btnSoldadoSoma.setText("+");
+        btnSoldadoSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSoldadoSomaActionPerformed(evt);
+            }
+        });
+
+        btnCienciaTecMenos.setText("-");
+        btnCienciaTecMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCienciaTecMenosActionPerformed(evt);
+            }
+        });
+
+        lblCienciaTecValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblCienciaTecValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblCienciaTecValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblCienciaTecValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblCienciaTecValor.setText("0");
+
+        btnCienciaTecSoma.setText("+");
+        btnCienciaTecSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCienciaTecSomaActionPerformed(evt);
+            }
+        });
+
+        btnMineradoresMenos.setText("-");
+        btnMineradoresMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMineradoresMenosActionPerformed(evt);
+            }
+        });
+
+        lblMineradoresValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblMineradoresValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblMineradoresValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblMineradoresValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblMineradoresValor.setText("0");
+
+        btnMineradoresSoma.setText("+");
+        btnMineradoresSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMineradoresSomaActionPerformed(evt);
+            }
+        });
+
+        btnFeiticariaSoma.setText("+");
+        btnFeiticariaSoma.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFeiticariaSomaActionPerformed(evt);
+            }
+        });
+
+        lblFeiticariaValor.setBackground(new java.awt.Color(255, 255, 255));
+        lblFeiticariaValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        lblFeiticariaValor.setForeground(new java.awt.Color(255, 255, 255));
+        lblFeiticariaValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblFeiticariaValor.setText("0");
+
+        btnFeiticariaMenos.setText("-");
+        btnFeiticariaMenos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnFeiticariaMenosActionPerformed(evt);
+            }
+        });
 
         jLayeredPane1.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspFazendas, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspConstrucao, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspFerreiro, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspSoldados, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel6, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspExploradores, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel7, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel8, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspMineradores, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel9, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspEstudarFeiticaria, javax.swing.JLayeredPane.DEFAULT_LAYER);
         jLayeredPane1.setLayer(jLabel10, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(jspEstudarCienciaTec, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        jLayeredPane1.setLayer(lblQtPessoasDisponiveis, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblFazendasValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnFazendaMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnFazendaSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnConstrucaoMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblConstrucaoValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnConstrucaoSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnFerreirosSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblFerreirosValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnFerreirosMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnSoldadoMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblSoldadoValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnExploradoresSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnExploradoresMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblExploradoresValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnSoldadoSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnCienciaTecMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblCienciaTecValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnCienciaTecSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnMineradoresMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblMineradoresValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnMineradoresSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnFeiticariaSoma, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(lblFeiticariaValor, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        jLayeredPane1.setLayer(btnFeiticariaMenos, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout jLayeredPane1Layout = new javax.swing.GroupLayout(jLayeredPane1);
         jLayeredPane1.setLayout(jLayeredPane1Layout);
@@ -184,93 +330,124 @@ public class TelaTarefas extends javax.swing.JFrame {
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
                         .addGap(10, 10, 10)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jspFazendas, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jspConstrucao, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(jspFerreiro, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jspSoldados, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jspExploradores, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jspMineradores, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                            .addComponent(btnFazendaMenos, javax.swing.GroupLayout.DEFAULT_SIZE, 38, Short.MAX_VALUE)
+                            .addComponent(btnConstrucaoMenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnFerreirosMenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSoldadoMenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExploradoresMenos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                                .addGap(5, 5, 5)
+                                .addComponent(lblFazendasValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jspEstudarFeiticaria, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                        .addComponent(jspEstudarCienciaTec, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(47, 47, 47))
+                                    .addComponent(lblFerreirosValor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblConstrucaoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblSoldadoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lblExploradoresValor, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 7, Short.MAX_VALUE)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(btnConstrucaoSoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnFazendaSoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnFerreirosSoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnExploradoresSoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(btnSoldadoSoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(btnCienciaTecMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblCienciaTecValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnCienciaTecSoma, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                                .addComponent(lblQtPessoasDisponiveis)
-                                .addGap(26, 26, 26))))))
+                                .addComponent(btnMineradoresMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblMineradoresValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnMineradoresSoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
+                                .addComponent(btnFeiticariaMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 37, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lblFeiticariaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnFeiticariaSoma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         jLayeredPane1Layout.setVerticalGroup(
             jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jLayeredPane1Layout.createSequentialGroup()
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 47, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspFazendas, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspEstudarFeiticaria, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspConstrucao, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jspEstudarCienciaTec, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(btnFeiticariaMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(lblFeiticariaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFeiticariaSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jspFerreiro, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jspSoldados, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jspExploradores, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jspMineradores, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(24, Short.MAX_VALUE))
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConstrucaoSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCienciaTecMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(lblCienciaTecValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnCienciaTecSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jLayeredPane1Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(lblQtPessoasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())))
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnFazendaMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(lblFazendasValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(btnFazendaSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblConstrucaoValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnConstrucaoMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFerreirosMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblFerreirosValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnFerreirosSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnMineradoresMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblMineradoresValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnMineradoresSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSoldadoMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblSoldadoValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSoldadoSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(btnExploradoresMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblExploradoresValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnExploradoresSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(29, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("Tarefas", jLayeredPane1);
@@ -297,6 +474,12 @@ public class TelaTarefas extends javax.swing.JFrame {
             }
         });
 
+        lblQtPessoasDisponiveis.setBackground(new java.awt.Color(0, 0, 0));
+        lblQtPessoasDisponiveis.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lblQtPessoasDisponiveis.setForeground(new java.awt.Color(255, 255, 255));
+        lblQtPessoasDisponiveis.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lblQtPessoasDisponiveis.setText("Quantidade de pessoas disponiveis");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -306,6 +489,8 @@ public class TelaTarefas extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(lblQtPessoasDisponiveis)
+                        .addGap(82, 82, 82)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1))
@@ -319,7 +504,9 @@ public class TelaTarefas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(lblQtPessoasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -344,61 +531,250 @@ public class TelaTarefas extends javax.swing.JFrame {
         construtor.setQtSpinnerFazendas(QtSpinnerFazendas);
         tela.exportaNome(construtor);
         dispose();
-        System.out.println("Taf "+QtSpinnerFazendas);
-
-        
+        System.out.println("Taf "+QtSpinnerFazendas);       
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jspFazendasStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspFazendasStateChanged
-        QtSpinnerFazendas = Integer.parseInt(jspFazendas.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
-    }//GEN-LAST:event_jspFazendasStateChanged
-
-    private void jspConstrucaoStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspConstrucaoStateChanged
-        QtSpinnerConstrucao = Integer.parseInt(jspConstrucao.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
-    }//GEN-LAST:event_jspConstrucaoStateChanged
-
-    private void jspFerreiroStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspFerreiroStateChanged
-        // TODO add your handling code here:
-        QtSpinnerFerreiro = Integer.parseInt(jspFerreiro.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
-    }//GEN-LAST:event_jspFerreiroStateChanged
-
-    private void jspSoldadosStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspSoldadosStateChanged
-        // TODO add your handling code here:
-        QtSpinnerSoldados = Integer.parseInt(jspSoldados.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
-
-    }//GEN-LAST:event_jspSoldadosStateChanged
-
-    private void jspExploradoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspExploradoresStateChanged
-        // TODO add your handling code here:
-        QtSpinnerExploradores = Integer.parseInt(jspExploradores.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
-
-    }//GEN-LAST:event_jspExploradoresStateChanged
-
-    private void jspMineradoresStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspMineradoresStateChanged
-        // TODO add your handling code here:
-        QtSpinnerMineradores = Integer.parseInt(jspMineradores.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
-
-    }//GEN-LAST:event_jspMineradoresStateChanged
-
-    private void jspEstudarFeiticariaStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspEstudarFeiticariaStateChanged
-        // TODO add your handling code here:
-        QtSpinnerFeiticaria = Integer.parseInt(jspEstudarFeiticaria.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
-
-    }//GEN-LAST:event_jspEstudarFeiticariaStateChanged
-
-    private void jspEstudarCienciaTecStateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jspEstudarCienciaTecStateChanged
-        // TODO add your handling code here:
-        QtSpinnerCiencia = Integer.parseInt(jspEstudarCienciaTec.getValue().toString());         // pegando o valor informando e transformando "String" para "int"
-        AtualizarTela();
+    void calcular(){
+ 
     
-    }//GEN-LAST:event_jspEstudarCienciaTecStateChanged
+        
+             
+        if (1 == VtCalcular) {          //Somar
+
+            switch(VtCalcular2){
+                case "Fazendas":
+                    QtSpinnerFazendas++;
+                break;
+                case "Ferreiros":
+                    QtSpinnerFerreiro++;
+                break;
+                case "Ciencia":
+                    QtSpinnerCiencia++;
+                break;
+                case "Construcao":
+                    QtSpinnerConstrucao++;
+                break;
+                case "Feiticaria":
+                    QtSpinnerFeiticaria++;
+                break;
+                case "Mineradores":
+                    QtSpinnerMineradores++;
+                break;
+                case "Soldados":
+                    QtSpinnerSoldados++;
+                break;
+                case "Exploradores":
+                    QtSpinnerExploradores++;
+                break;
+            }
+            
+        }else{                      //Diminuir
+            switch(VtCalcular2){
+                case "Fazendas":
+                    QtSpinnerFazendas--;
+                break;
+                case "Ferreiros":
+                    QtSpinnerFerreiro--;
+                break;
+                case "Ciencia":
+                    QtSpinnerCiencia--;
+                break;
+                case "Construcao":
+                    QtSpinnerConstrucao--;
+                break;
+                case "Feiticaria":
+                    QtSpinnerFeiticaria--;
+                break;
+                case "Mineradores":
+                    QtSpinnerMineradores--;
+                break;
+                case "Soldados":
+                    QtSpinnerSoldados--;
+                break;
+                case "Exploradores":
+                    QtSpinnerExploradores--;
+                break;
+            }
+            
+        }
+    
+        
+    }
+    
+    void Atualizar(){
+        
+        calcular();
+        
+        QtDisponivel =  QtTrabalhadores-(QtSpinnerFazendas+QtSpinnerConstrucao+QtSpinnerFerreiro+QtSpinnerSoldados+QtSpinnerExploradores+QtSpinnerMineradores+QtSpinnerFeiticaria+QtSpinnerCiencia);                                // atualizando valor do funcionario trabalhando   
+        lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
+        
+            if (QtDisponivel == 0) {
+            btnFazendaSoma.setEnabled(false);
+            btnCienciaTecSoma.setEnabled(false);
+            btnConstrucaoSoma.setEnabled(false);
+            btnExploradoresSoma.setEnabled(false);
+            btnFerreirosSoma.setEnabled(false);
+            btnSoldadoSoma.setEnabled(false);
+            btnMineradoresSoma.setEnabled(false);
+            btnFeiticariaSoma.setEnabled(false);
+        }else{
+            btnFazendaSoma.setEnabled(true);
+            btnCienciaTecSoma.setEnabled(true);
+            btnConstrucaoSoma.setEnabled(true);
+            btnExploradoresSoma.setEnabled(true);
+            btnFerreirosSoma.setEnabled(true);
+            btnSoldadoSoma.setEnabled(true);
+            btnMineradoresSoma.setEnabled(true);
+            btnFeiticariaSoma.setEnabled(true);
+        }
+            
+        if (QtSpinnerFazendas == 0) {
+            btnFazendaMenos.setEnabled(false);
+        }else{
+            btnFazendaMenos.setEnabled(true);
+        }
+        if (QtSpinnerConstrucao == 0) {
+            btnConstrucaoMenos.setEnabled(false);
+        }else{
+            btnConstrucaoMenos.setEnabled(true);
+        }
+        if (QtSpinnerExploradores == 0) {
+            btnExploradoresMenos.setEnabled(false);
+        }else{
+            btnExploradoresMenos.setEnabled(true);
+        }
+        if (QtSpinnerFeiticaria == 0) {
+            btnFeiticariaMenos.setEnabled(false);
+        }else{
+            btnFeiticariaMenos.setEnabled(true);
+        }
+        if (QtSpinnerCiencia == 0) {
+            btnCienciaTecMenos.setEnabled(false);
+        }else{
+            btnCienciaTecMenos.setEnabled(true);
+        }
+        if (QtSpinnerFerreiro == 0) {
+            btnFerreirosMenos.setEnabled(false);
+        }else{
+            btnFerreirosMenos.setEnabled(true);
+        }
+        if (QtSpinnerSoldados == 0) {
+            btnSoldadoMenos.setEnabled(false);
+        }else{
+            btnSoldadoMenos.setEnabled(true);
+        }
+        if (QtSpinnerMineradores == 0) {
+            btnMineradoresMenos.setEnabled(false);
+        }else{
+            btnMineradoresMenos.setEnabled(true);
+        }
+
+        lblCienciaTecValor.setText(Integer.toString(QtSpinnerCiencia));
+        lblConstrucaoValor.setText(Integer.toString(QtSpinnerConstrucao));
+        lblFazendasValor.setText(Integer.toString(QtSpinnerFazendas));
+        lblExploradoresValor.setText(Integer.toString(QtSpinnerExploradores));
+        lblFeiticariaValor.setText(Integer.toString(QtSpinnerFeiticaria));
+        lblFerreirosValor.setText(Integer.toString(QtSpinnerFerreiro));
+        lblSoldadoValor.setText(Integer.toString(QtSpinnerSoldados));
+        lblMineradoresValor.setText(Integer.toString(QtSpinnerMineradores));
+        
+    }
+    
+    private void btnFazendaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFazendaMenosActionPerformed
+        VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Fazendas";     //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnFazendaMenosActionPerformed
+
+    private void btnConstrucaoMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConstrucaoMenosActionPerformed
+        VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Construcao";     //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnConstrucaoMenosActionPerformed
+
+    private void btnFerreirosMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFerreirosMenosActionPerformed
+        VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Ferreiros";     //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnFerreirosMenosActionPerformed
+
+    private void btnSoldadoMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldadoMenosActionPerformed
+        VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Soldados";     //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnSoldadoMenosActionPerformed
+
+    private void btnExploradoresMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploradoresMenosActionPerformed
+        VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Exploradores";     //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnExploradoresMenosActionPerformed
+
+    private void btnFazendaSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFazendaSomaActionPerformed
+        VtCalcular=1;       //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Fazendas";     //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnFazendaSomaActionPerformed
+
+    private void btnConstrucaoSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConstrucaoSomaActionPerformed
+        VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Construcao";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnConstrucaoSomaActionPerformed
+
+    private void btnFerreirosSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFerreirosSomaActionPerformed
+        VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Ferreiros";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnFerreirosSomaActionPerformed
+
+    private void btnSoldadoSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldadoSomaActionPerformed
+        VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Soldados";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnSoldadoSomaActionPerformed
+
+    private void btnExploradoresSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploradoresSomaActionPerformed
+        VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Exploradores";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnExploradoresSomaActionPerformed
+
+    private void btnFeiticariaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeiticariaMenosActionPerformed
+        VtCalcular=2;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Feiticaria";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnFeiticariaMenosActionPerformed
+
+    private void btnCienciaTecMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCienciaTecMenosActionPerformed
+        VtCalcular=2;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Ciencia";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnCienciaTecMenosActionPerformed
+
+    private void btnMineradoresMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMineradoresMenosActionPerformed
+        VtCalcular=2;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Mineradores";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnMineradoresMenosActionPerformed
+
+    private void btnFeiticariaSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeiticariaSomaActionPerformed
+        VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Feiticaria";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnFeiticariaSomaActionPerformed
+
+    private void btnCienciaTecSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCienciaTecSomaActionPerformed
+        VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Ciencia";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnCienciaTecSomaActionPerformed
+
+    private void btnMineradoresSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMineradoresSomaActionPerformed
+        VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Mineradores";         //Variavel para informa qual item somar ou diminuir
+        Atualizar();
+    }//GEN-LAST:event_btnMineradoresSomaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -437,6 +813,22 @@ public class TelaTarefas extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnCienciaTecMenos;
+    private javax.swing.JButton btnCienciaTecSoma;
+    private javax.swing.JButton btnConstrucaoMenos;
+    private javax.swing.JButton btnConstrucaoSoma;
+    private javax.swing.JButton btnExploradoresMenos;
+    private javax.swing.JButton btnExploradoresSoma;
+    private javax.swing.JButton btnFazendaMenos;
+    private javax.swing.JButton btnFazendaSoma;
+    private javax.swing.JButton btnFeiticariaMenos;
+    private javax.swing.JButton btnFeiticariaSoma;
+    private javax.swing.JButton btnFerreirosMenos;
+    private javax.swing.JButton btnFerreirosSoma;
+    private javax.swing.JButton btnMineradoresMenos;
+    private javax.swing.JButton btnMineradoresSoma;
+    private javax.swing.JButton btnSoldadoMenos;
+    private javax.swing.JButton btnSoldadoSoma;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -453,14 +845,14 @@ public class TelaTarefas extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JSpinner jspConstrucao;
-    private javax.swing.JSpinner jspEstudarCienciaTec;
-    private javax.swing.JSpinner jspEstudarFeiticaria;
-    private javax.swing.JSpinner jspExploradores;
-    private javax.swing.JSpinner jspFazendas;
-    private javax.swing.JSpinner jspFerreiro;
-    private javax.swing.JSpinner jspMineradores;
-    private javax.swing.JSpinner jspSoldados;
+    private javax.swing.JLabel lblCienciaTecValor;
+    private javax.swing.JLabel lblConstrucaoValor;
+    private javax.swing.JLabel lblExploradoresValor;
+    private javax.swing.JLabel lblFazendasValor;
+    private javax.swing.JLabel lblFeiticariaValor;
+    private javax.swing.JLabel lblFerreirosValor;
+    private javax.swing.JLabel lblMineradoresValor;
     private javax.swing.JLabel lblQtPessoasDisponiveis;
+    private javax.swing.JLabel lblSoldadoValor;
     // End of variables declaration//GEN-END:variables
 }

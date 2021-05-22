@@ -117,40 +117,44 @@ public class TelaJogo extends javax.swing.JFrame {
         
         if (Vt==2) {
             btnOp1.setText("Ok");
-            lblMsg.setText("<html>No canto direito podemos observa<br/> a quantidade de pessoas que <br/>temos em nossa vila.<br/><br/> Atualmente temos 10 Pessoas.</html>");
-            
+                        
             switch (VtPrimeirosPassos) {
                 case 1:
+            
+                lblMsg.setText("<html>No canto direito podemos observa<br/> a quantidade de pessoas que <br/>temos em nossa vila.<br/><br/> Atualmente temos 10 Pessoas.</html>");
+                    
+                break;
+                case 2:
             
                 lblMsg.setText("<html>Abaixo temos os alimentos das vilas,<br/> nunca deixe abaixo da metade.<br/> Isso pode gerar um pouco de <br/> confusão nas cidades!<br/><br/></html>");
                     
                 break;
-                case 2:
+                case 3:
                     
                 lblMsg.setText("<html>Como estamos começando,<br/> temos apenas uma vila... <br/>mas tenho certeza que vamos<br/> conseguir muito mais!</html>");
 
                 break;
-                case 3:
+                case 4:
 
                 lblMsg.setText("<html>E não podemos esquecer<br/> as nossas riquezas! <br/> quanto maior for o nosso posicionamento<br/> mais feliz os cidadões ficam! <br/> mas cuidado, isso tambem pode atrair latroes!</html>");
 
                 break;
-                case 4:
+                case 5:
 
                 lblMsg.setText("<html>Ao lado esquerdo<br/> podemos observar quantos </br> soltados temos.<br/> Quanto mais melhor! <br/> isso deixa as vilas mais seguras </html>");
 
                 break;
-                case 5:
+                case 6:
 
                 lblMsg.setText("<html>Abaixo temos as armas,<br/> precisamos sempre estar<br/> armados para futuros confrontos.</html>");
 
                 break;
-                case 6:
+                case 7:
 
                 lblMsg.setText("<html>E por fim, temos o status<br/> fique de olhada para saber como as<br/> coisas estão indo.</html>");
 
                 break;
-                case 7:
+                case 8:
 
                 lblMsg.setText("<html>Agora vamos trabalhar!</html>");
                 btnOp1.setText("Vamos la!");
@@ -306,7 +310,6 @@ public class TelaJogo extends javax.swing.JFrame {
             btnCentral.setEnabled(false);
             btnCentral.setText("-");
             btnSair.setText("Jogar novamente");
-            System.out.println(VtPrimeirosPassos);
             IniciarAtualizar();
         }else{
         
@@ -324,7 +327,7 @@ public class TelaJogo extends javax.swing.JFrame {
         //analise das variaveis
         debug++;
         System.out.println("----/Inicio/----- "+debug);
-        System.out.println(QtFazendas);
+        //System.out.println(VtPrimeirosPassos);
         System.out.println("----/Fim/-----");
         }
 
@@ -646,6 +649,7 @@ public class TelaJogo extends javax.swing.JFrame {
                 Vt=2;
                 PrimeirosPassos();
                 btnOp3.setText("Finalizar");
+                VtPrimeirosPassos++;
             break;
             case 2:     //Fazer o Tutorial
                 VtPrimeirosPassos++;
@@ -691,7 +695,11 @@ public class TelaJogo extends javax.swing.JFrame {
         }
         LimparOp();
 
-        Timer timer = new Timer();
+        if (VtPrimeirosPassos <= 7) {
+            Jogo();
+        } else {
+
+            Timer timer = new Timer();
         TimerTask tarea = new TimerTask(){
             @Override
             public void run(){
@@ -699,6 +707,9 @@ public class TelaJogo extends javax.swing.JFrame {
             }
         };
         timer.schedule(tarea, b, a);
+
+        }
+        
     }//GEN-LAST:event_btnOp1ActionPerformed
 
     private void btnOp2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOp2ActionPerformed
