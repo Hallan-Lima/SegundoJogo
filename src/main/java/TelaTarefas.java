@@ -1,5 +1,3 @@
-import javax.sound.sampled.SourceDataLine;
-
 import Construtor.ConstrutorJogo;
 
 /*
@@ -30,8 +28,11 @@ public class TelaTarefas extends javax.swing.JFrame {
     public TelaTarefas() {
         initComponents();
     }
-    public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
+    public void exportaTrabalhadores(ConstrutorJogo construtor, int QtSpinnerFazendas) {            //pega o nome do usuario
         QtTrabalhadores = construtor.getQtTrabalhadores();
+        QtSpinnerFazendas = construtor.getQtSpinnerFazendas();
+        lblFazendasValor.setText(Integer.toString(construtor.getQtSpinnerFazendas()));
+
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -530,15 +531,13 @@ public class TelaTarefas extends javax.swing.JFrame {
         // fechar central de tarefas
         construtor.setQtSpinnerFazendas(QtSpinnerFazendas);
         tela.exportaNome(construtor);
+        construtor.retorno();
         dispose();
         System.out.println("Taf "+QtSpinnerFazendas);       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     void calcular(){
- 
-    
-        
-             
+           
         if (1 == VtCalcular) {          //Somar
 
             switch(VtCalcular2){

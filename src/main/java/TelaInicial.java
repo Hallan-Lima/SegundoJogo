@@ -2,6 +2,8 @@
 import Construtor.ConstrutorJogo;
 import java.util.Locale;
 
+import javax.sound.sampled.SourceDataLine;
+
 /*
  * Link de videos que ajudaram
  *
@@ -138,21 +140,21 @@ public class TelaInicial extends javax.swing.JFrame {
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // Abrir tela do jogo
 
-        
-        construtor.setNome(txtNome.getText());                 // pegar nome
-        construtor.setNomeReino(txtNomeReino.getText());      // pegar nome reino
-        
-        //if (txtNome.getText() == "") {
-         //   System.out.println("ok");
-        //} else {
-         //   System.out.println("nome "+txtNome.getText());
-        //}
-
-        TelaJogo tela = new TelaJogo();             // criando obj
-        tela.exportaNome(construtor);               // enviar nome
-        
-        tela.setVisible(true);                      // chamando tela
-        dispose();                                  // fechando tela inicial
+         
+        if((txtNome.getText().isEmpty() == false) && (txtNomeReino.getText().isEmpty() == false)){            //comando para verificar se tem algum texto
+            construtor.setNome(txtNome.getText());                 // pegar nome
+            construtor.setNomeReino(txtNomeReino.getText());      // pegar nome reino
+ 
+            TelaJogo tela = new TelaJogo();             // criando obj
+            tela.exportaNome(construtor);               // enviar nome
+            
+            tela.setVisible(true);                      // chamando tela
+            dispose();                                  // fechando tela inicial
+        }else{
+  
+            jLabel1.setText("Por favor, preencha como devemos le chamar e o nome do seu reino");
+            
+        }
         
     }//GEN-LAST:event_jButton1ActionPerformed
 

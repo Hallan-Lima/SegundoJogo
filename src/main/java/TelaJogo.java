@@ -11,7 +11,7 @@ import java.util.TimerTask;
  */
 public class TelaJogo extends javax.swing.JFrame {
     
-    int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias, QtTrabalhadores,QtFazendas;
+    int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias, QtTrabalhadores,QtFazendas,QtSpinnerFazendas;
 
     int StatusTristezaPessoas,	StatusTristezaAlimentos, StatusTristezaRiquezas,	StatusTristezaSoldados,	StatusRaivaPessoas,	StatusRaivaRiquezas,	StatusRaivaArmas,	StatusRaivaSoldados,	StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	StatusFelicidadeSoldados, StatusSoma, sentimento10, sentimento20, sentimento30, sentimento40, sentimento50, StatusFelicidade, StatusTristeza, StatusRaiva, QtRodada;
 
@@ -819,9 +819,10 @@ public class TelaJogo extends javax.swing.JFrame {
     private void btnCentralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentralActionPerformed
         // Abrir Central de tarefas
         construtor.setQtTrabalhadores(QtPessoas);      // pegar quantidade de pessoas
-        
+        construtor.retorno();
+                
         TelaTarefas tela = new TelaTarefas();             // criando obj
-        tela.exportaTrabalhadores(construtor);               // enviar Quantidade de pessoas
+        tela.exportaTrabalhadores(construtor, QtSpinnerFazendas);               // enviar Quantidade de pessoas
 
         tela.setVisible(true);
     }//GEN-LAST:event_btnCentralActionPerformed

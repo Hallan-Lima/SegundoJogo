@@ -18,6 +18,11 @@ public class ConstrutorJogo {
 
     private int QtSpinnerFazendas;
 
+    public void retorno(){
+        setQtSpinnerFazendas(QtSpinnerFazendas);
+        System.out.println("construtor "+QtSpinnerFazendas);
+
+    }
 
     /**
      * @return the nome
