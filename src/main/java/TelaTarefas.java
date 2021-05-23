@@ -1,3 +1,5 @@
+import javax.sound.sampled.SourceDataLine;
+
 import Construtor.ConstrutorJogo;
 
 /*
@@ -12,7 +14,7 @@ import Construtor.ConstrutorJogo;
  */
 public class TelaTarefas extends javax.swing.JFrame {
     
-    int QtTrabalhadores, QtDisponivel, Vt, QtSpinnerFazendas=0, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,ValorSpinner=1;
+    int QtTrabalhadores, QtDisponivel, Vt, QtSpinnerFazendas, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,ValorSpinner=1;
     
     int VtCalcular;
     
@@ -28,12 +30,13 @@ public class TelaTarefas extends javax.swing.JFrame {
     public TelaTarefas() {
         initComponents();
     }
-    public void exportaTrabalhadores(ConstrutorJogo construtor, int QtSpinnerFazendas) {            //pega o nome do usuario
+    public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
         QtTrabalhadores = construtor.getQtTrabalhadores();
-        QtSpinnerFazendas = construtor.getQtSpinnerFazendas();
-        lblFazendasValor.setText(Integer.toString(construtor.getQtSpinnerFazendas()));
-
     }
+    public void exportaQtFazendas(ConstrutorJogo construtor) {
+        QtSpinnerFazendas = construtor.getQtFazendas();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -528,12 +531,7 @@ public class TelaTarefas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // fechar central de tarefas
-        construtor.setQtSpinnerFazendas(QtSpinnerFazendas);
-        tela.exportaNome(construtor);
-        construtor.retorno();
         dispose();
-        System.out.println("Taf "+QtSpinnerFazendas);       
     }//GEN-LAST:event_jButton1ActionPerformed
 
     void calcular(){
@@ -543,6 +541,8 @@ public class TelaTarefas extends javax.swing.JFrame {
             switch(VtCalcular2){
                 case "Fazendas":
                     QtSpinnerFazendas++;
+                    construtor.setQtFazendas(QtSpinnerFazendas);
+                    construtor.retorno();
                 break;
                 case "Ferreiros":
                     QtSpinnerFerreiro++;

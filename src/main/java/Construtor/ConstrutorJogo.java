@@ -1,7 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
+ * Link de videos que ajudaram
+ *
+ * https://www.youtube.com/watch?v=-V66mnoUGG8      // como colocar um personagem e fazer ele se mexer
+ * https://www.youtube.com/watch?v=gEI_bj5t7fo      // Tutorial Java Passando variáveis entre janelas
+ *
  */
 package Construtor;
 
@@ -16,12 +18,10 @@ public class ConstrutorJogo {
     private String nomeReino;
     private int QtTrabalhadores;
 
-    private int QtSpinnerFazendas;
+    private int QtFazendas;
 
     public void retorno(){
-        setQtSpinnerFazendas(QtSpinnerFazendas);
-        System.out.println("construtor "+QtSpinnerFazendas);
-
+        System.out.println(QtFazendas);
     }
 
     /**
@@ -67,16 +67,16 @@ public class ConstrutorJogo {
     }
 
     /**
-     * @return the QtSpinnerFazendas
+     * @return the QtFazendas
      */
-    public int getQtSpinnerFazendas() {
-        return QtSpinnerFazendas;
+    public int getQtFazendas() {
+        return QtFazendas;
     }
 
     /**
-     * @param QtSpinnerFazendas the QtSpinnerFazendas to set
+     * @param QtFazendas the QtFazendas to set
      */
-    public void setQtSpinnerFazendas(int QtSpinnerFazendas) {
-        this.QtSpinnerFazendas = QtSpinnerFazendas;
+    public void setQtFazendas(int QtFazendas) {
+        this.QtFazendas = QtFazendas;
     }
 }

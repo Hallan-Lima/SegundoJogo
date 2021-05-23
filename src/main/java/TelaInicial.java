@@ -4,14 +4,6 @@ import java.util.Locale;
 
 import javax.sound.sampled.SourceDataLine;
 
-/*
- * Link de videos que ajudaram
- *
- * https://www.youtube.com/watch?v=-V66mnoUGG8
- * https://www.youtube.com/watch?v=gEI_bj5t7fo
- *
- */
-
 /**
  *
  * @author hlima

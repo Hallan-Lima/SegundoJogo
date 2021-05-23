@@ -31,8 +31,6 @@ public class TelaJogo extends javax.swing.JFrame {
     public void exportaNome(ConstrutorJogo construtor) {            //pega o nome do usuario
         lblNomeReino.setText(construtor.getNomeReino());
         nome = construtor.getNome();
-        QtFazendas = construtor.getQtSpinnerFazendas();
-        System.out.println("Jogo "+ QtFazendas);
     }
     
     public void ContagemTempo(){                                    
@@ -818,11 +816,11 @@ public class TelaJogo extends javax.swing.JFrame {
 
     private void btnCentralActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCentralActionPerformed
         // Abrir Central de tarefas
-        construtor.setQtTrabalhadores(QtPessoas);      // pegar quantidade de pessoas
-        construtor.retorno();
-                
+        construtor.setQtTrabalhadores(QtPessoas);          //enviar quanntidade de pessoas
         TelaTarefas tela = new TelaTarefas();             // criando obj
-        tela.exportaTrabalhadores(construtor, QtSpinnerFazendas);               // enviar Quantidade de pessoas
+        tela.exportaTrabalhadores(construtor);               // enviar Quantidade de pessoas
+        tela.exportaQtFazendas(construtor);
+        construtor.retorno();
 
         tela.setVisible(true);
     }//GEN-LAST:event_btnCentralActionPerformed
