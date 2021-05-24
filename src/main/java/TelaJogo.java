@@ -11,7 +11,7 @@ import java.util.TimerTask;
  */
 public class TelaJogo extends javax.swing.JFrame {
     
-    int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias, QtTrabalhadores,QtFazendas,QtSpinnerFazendas;
+    int QtAlimentos=100, QtPessoas=10, QtVilas=1, QtRiquezas, QtArmas, QtSoldados, Status, Vt,VtPrimeirosPassos=0, Valor, debug=0, QtDias, QtTrabalhadores,QtFazendas,QtSpinnerFazendas, VtHistoria;
 
     int StatusTristezaPessoas,	StatusTristezaAlimentos, StatusTristezaRiquezas,	StatusTristezaSoldados,	StatusRaivaPessoas,	StatusRaivaRiquezas,	StatusRaivaArmas,	StatusRaivaSoldados,	StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	StatusFelicidadeSoldados, StatusSoma, sentimento10, sentimento20, sentimento30, sentimento40, sentimento50, StatusFelicidade, StatusTristeza, StatusRaiva, QtRodada;
 
@@ -178,6 +178,23 @@ public class TelaJogo extends javax.swing.JFrame {
         sentimento40 = (aleatorio.nextInt(40)+5);
         sentimento50 = (aleatorio.nextInt(50)+5);
 
+        if ((StatusSoma <= 90) && (VtHistoria == 0)) {
+
+            Valor=1;
+
+            switch (Valor) {
+                case 1:
+                    lblMsg.setText("<html>Ola Sr."+nome+"<br/>teste</html>");
+                    btnOp1.setText("Sim");
+                    btnOp2.setText("Talvez");
+                    btnOp3.setText("Não");
+                    Vt=21;
+                    VtHistoria++;
+                break;
+            }
+            
+        } else {
+                    
         switch (Valor) {
             case 1:
                 lblMsg.setText("<html>Ola Sr."+nome+"<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
@@ -221,12 +238,16 @@ public class TelaJogo extends javax.swing.JFrame {
                 Vt=16;              //Numero da historia nos botões
             break;
         }
+        }
     }
 
     void Status(){
 
          //para diminuir aos poucos o valor
         if (QtRodada > 7) {
+
+            VtHistoria=0;
+
             StatusRaivaPessoas = (StatusRaivaPessoas < 0 )? StatusRaivaPessoas + sentimento10: StatusRaivaPessoas;     
             StatusTristezaPessoas  =  (StatusTristezaPessoas  < 0) ? StatusTristezaPessoas  + sentimento10:StatusTristezaPessoas ;
             StatusTristezaAlimentos  =  ( StatusTristezaAlimentos  < 0) ?  StatusTristezaAlimentos  + sentimento10: StatusTristezaAlimentos ;
