@@ -195,7 +195,7 @@ public class TelaJogo extends javax.swing.JFrame {
             
         } else {
                     
-        switch (Valor) {
+        switch (Valor) {                    //INCLUIR MAIS "HISTORIAS" ou "Cases"
             case 1:
                 lblMsg.setText("<html>Ola Sr."+nome+"<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
                 btnOp1.setText("Sim");
