@@ -17,11 +17,18 @@ public class ConstrutorJogo {
     private String nome;
     private String nomeReino;
     private int QtTrabalhadores;
-
+    private int QtFerreiro;
     private int QtFazendas;
 
     public void retorno(){
         System.out.println(QtFazendas);
+    }
+
+    public int getQtFerreiro() {
+        return QtFerreiro;
+    }
+    public void setQtFerreiro(int qtFerreiro) {
+        QtFerreiro = qtFerreiro;
     }
 
     /**

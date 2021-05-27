@@ -29,6 +29,7 @@ public class TelaTarefas extends javax.swing.JFrame {
      */
     public TelaTarefas() {
         initComponents();
+       
     }
     public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
         QtTrabalhadores = construtor.getQtTrabalhadores();
@@ -184,7 +185,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         lblFerreirosValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblFerreirosValor.setForeground(new java.awt.Color(255, 255, 255));
         lblFerreirosValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFerreirosValor.setText("0");
+        lblFerreirosValor.setText(Integer.toString(construtor.getQtFerreiro()));
 
         btnFerreirosMenos.setText("-");
         btnFerreirosMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -284,7 +285,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         lblFeiticariaValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblFeiticariaValor.setForeground(new java.awt.Color(255, 255, 255));
         lblFeiticariaValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFeiticariaValor.setText("0");
+        lblFeiticariaValor.setText(Integer.toString(construtor.getQtFazendas()));
 
         btnFeiticariaMenos.setText("-");
         btnFeiticariaMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -546,6 +547,7 @@ public class TelaTarefas extends javax.swing.JFrame {
                 break;
                 case "Ferreiros":
                     QtSpinnerFerreiro++;
+                    construtor.setQtFerreiro(QtSpinnerFerreiro);
                 break;
                 case "Ciencia":
                     QtSpinnerCiencia++;
@@ -670,10 +672,10 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         lblCienciaTecValor.setText(Integer.toString(QtSpinnerCiencia));
         lblConstrucaoValor.setText(Integer.toString(QtSpinnerConstrucao));
-        lblFazendasValor.setText(Integer.toString(QtSpinnerFazendas));
+        lblFazendasValor.setText(Integer.toString(construtor.getQtFazendas()));
         lblExploradoresValor.setText(Integer.toString(QtSpinnerExploradores));
         lblFeiticariaValor.setText(Integer.toString(QtSpinnerFeiticaria));
-        lblFerreirosValor.setText(Integer.toString(QtSpinnerFerreiro));
+        lblFerreirosValor.setText(Integer.toString(construtor.getQtFerreiro()));
         lblSoldadoValor.setText(Integer.toString(QtSpinnerSoldados));
         lblMineradoresValor.setText(Integer.toString(QtSpinnerMineradores));
         

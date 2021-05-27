@@ -109,6 +109,9 @@ public class TelaJogo extends javax.swing.JFrame {
         btnOp1.setText("-");
         btnOp2.setText("-");
         btnOp3.setText("-");
+        btnOp1.setEnabled(true);
+        btnOp2.setEnabled(true);
+        btnOp3.setEnabled(true);
     }
  
     void PrimeirosPassos(){
@@ -178,17 +181,28 @@ public class TelaJogo extends javax.swing.JFrame {
         sentimento40 = (aleatorio.nextInt(40)+5);
         sentimento50 = (aleatorio.nextInt(50)+5);
 
-        if ((StatusSoma <= 90) && (VtHistoria == 0)) {
+        if ((StatusRaivaPessoas <= -50 || StatusFelicidadePessoas <= 50) && (VtHistoria == 0)) {
 
-            Valor=1;
+            Valor = (StatusRaivaPessoas <= -50)? 21 : Valor;
+            Valor = (StatusFelicidadePessoas <= 50)? 22 : Valor;
 
+            
             switch (Valor) {
-                case 1:
-                    lblMsg.setText("<html>Ola Sr."+nome+"<br/>teste</html>");
-                    btnOp1.setText("Sim");
-                    btnOp2.setText("Talvez");
-                    btnOp3.setText("Não");
+                case 21:
+                    lblMsg.setText("<html>Ola Sr."+nome+"<br/>As pessoas estão muito irritadas<br/>O que devemos fazer?</html>");
+                    btnOp1.setText("Vamos fazer uma festa!");
+                    btnOp2.setText("Não a pq ficarem irritados.");
+                    btnOp3.setText("Uma hora vai passar...");
                     Vt=21;
+                    VtHistoria++;
+                break;
+                case 22:
+                    lblMsg.setText("<html>Ola Sr."+nome+"<br/>As pessoas estão ficando infeliz<br/>O que devemos fazer?</html>");
+                    btnOp1.setText("Vamos fazer uma festa!");
+                    btnOp2.setEnabled(false);
+                    btnOp2.setText("-");
+                    btnOp3.setText("Uma hora vai passar...");
+                    Vt=22;
                     VtHistoria++;
                 break;
             }
@@ -199,6 +213,8 @@ public class TelaJogo extends javax.swing.JFrame {
             case 1:
                 lblMsg.setText("<html>Ola Sr."+nome+"<br/>Estamos aqui pois chegou alguns nomades<br/> que querem viver aqui.<br/><br/>Eles podem fica?</html>");
                 btnOp1.setText("Sim");
+                btnOp2.setEnabled(false);
+                btnOp2.setText("-");
                 btnOp3.setText("Não");
                 Vt=11;              //Numero da historia nos botões
             break;
@@ -710,6 +726,28 @@ public class TelaJogo extends javax.swing.JFrame {
                 StatusFelicidadePessoas += sentimento10;
                 }
             break;
+            case 21:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. fizemos uma festa mas o povo não gostou<br/> saquearam e distruiram tudo.<html/>");
+                    QtAlimentos-= sentimento40;
+                    StatusRaivaPessoas += sentimento10;
+                } else {
+                lblMsg.setText("<html>Sr. fizemos uma festa e o povo <br/> parece ter ficado mais tranquilo.<html/>");
+                QtAlimentos-=30;
+                StatusRaivaPessoas += sentimento30;
+                }
+            break;
+            case 22:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. fizemos uma festa mas o <br/>povo não gostou muito.<html/>");
+                    QtAlimentos-= sentimento40;
+                    StatusFelicidadePessoas += sentimento20;
+                } else {
+                lblMsg.setText("<html>Sr. fizemos a festa e o povo <br/> adorou.<html/>");
+                QtAlimentos -=  sentimento40;
+                StatusFelicidadePessoas += sentimento50;
+                }
+            break;
             
         }
         LimparOp();
@@ -767,6 +805,17 @@ public class TelaJogo extends javax.swing.JFrame {
                 lblMsg.setText("Ok Sr.");
                 StatusFelicidadePessoas += sentimento10;
             break;
+            case 21:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. o povo esta saqueando e distruiram tudo<br/> tivemos que usar a força.<html/>");
+                    QtAlimentos-=15;
+                    StatusRaivaPessoas -= sentimento30;
+                } else {
+                lblMsg.setText("<html>Sr. precisamos mostra quem manda aqui<br/> execultamos algumas pessoas.<html/>");
+                QtPessoas -= (sentimento30/10);
+                StatusRaivaPessoas += sentimento50;
+                }
+            break;
 
         }
     
@@ -820,6 +869,29 @@ public class TelaJogo extends javax.swing.JFrame {
                 StatusRaivaPessoas -= sentimento30;
                 StatusTristezaPessoas -= sentimento20;
             break;
+            case 21:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. algumas pessoas se juntaram<br/> e ficaram protestante<br/> mas ja foram embora.<html/>");
+                    StatusRaivaPessoas += sentimento20;
+                } else {
+                    lblMsg.setText("<html>OK Sr.<html/>");
+                    StatusRaivaPessoas += sentimento10;
+                }
+            break;
+            case 22:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. algumas pessoas se mataram.<html/>");
+                    QtPessoas -= (sentimento30/10);
+                    StatusRaivaPessoas += sentimento20;
+                    StatusFelicidadePessoas -= sentimento30;
+                } else {
+                    lblMsg.setText("<html>OK Sr.<html/>");
+                    StatusRaivaPessoas += sentimento10;
+                    StatusFelicidadePessoas -= sentimento20;
+                }
+            break;
+      
+
         }
  
          LimparOp();
@@ -840,9 +912,6 @@ public class TelaJogo extends javax.swing.JFrame {
         construtor.setQtTrabalhadores(QtPessoas);          //enviar quanntidade de pessoas
         TelaTarefas tela = new TelaTarefas();             // criando obj
         tela.exportaTrabalhadores(construtor);               // enviar Quantidade de pessoas
-        tela.exportaQtFazendas(construtor);
-        construtor.retorno();
-
         tela.setVisible(true);
     }//GEN-LAST:event_btnCentralActionPerformed
     
