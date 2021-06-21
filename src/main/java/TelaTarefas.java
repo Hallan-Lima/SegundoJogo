@@ -1,6 +1,7 @@
 import javax.sound.sampled.SourceDataLine;
 
 import Construtor.ConstrutorJogo;
+import java.util.HashSet;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -34,10 +35,7 @@ public class TelaTarefas extends javax.swing.JFrame {
     public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
         QtTrabalhadores = construtor.getQtTrabalhadores();
     }
-    public void exportaQtFazendas(ConstrutorJogo construtor) {
-        QtSpinnerFazendas = construtor.getQtFazendas();
-    }
-
+ 
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -185,7 +183,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         lblFerreirosValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblFerreirosValor.setForeground(new java.awt.Color(255, 255, 255));
         lblFerreirosValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFerreirosValor.setText(Integer.toString(construtor.getQtFerreiro()));
+        lblFerreirosValor.setText("0");
 
         btnFerreirosMenos.setText("-");
         btnFerreirosMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -285,7 +283,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         lblFeiticariaValor.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         lblFeiticariaValor.setForeground(new java.awt.Color(255, 255, 255));
         lblFeiticariaValor.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        lblFeiticariaValor.setText(Integer.toString(construtor.getQtFazendas()));
+        lblFeiticariaValor.setText("0");
 
         btnFeiticariaMenos.setText("-");
         btnFeiticariaMenos.addActionListener(new java.awt.event.ActionListener() {
@@ -403,13 +401,14 @@ public class TelaTarefas extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createSequentialGroup()
-                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(btnFeiticariaMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(lblFeiticariaValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(btnFeiticariaSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(btnFeiticariaSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -429,16 +428,17 @@ public class TelaTarefas extends javax.swing.JFrame {
                             .addComponent(lblConstrucaoValor, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(btnConstrucaoMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFerreirosMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(lblFerreirosValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnFerreirosSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnMineradoresMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(lblMineradoresValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnMineradoresSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(btnMineradoresSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFerreirosMenos, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(lblFerreirosValor, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btnFerreirosSoma, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jLayeredPane1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -542,12 +542,11 @@ public class TelaTarefas extends javax.swing.JFrame {
             switch(VtCalcular2){
                 case "Fazendas":
                     QtSpinnerFazendas++;
-                    construtor.setQtFazendas(QtSpinnerFazendas);
-                    construtor.retorno();
+                    tela.QtFazendasS();
                 break;
                 case "Ferreiros":
                     QtSpinnerFerreiro++;
-                    construtor.setQtFerreiro(QtSpinnerFerreiro);
+                   // construtor.setQtFerreiro(QtSpinnerFerreiro);
                 break;
                 case "Ciencia":
                     QtSpinnerCiencia++;
@@ -573,6 +572,7 @@ public class TelaTarefas extends javax.swing.JFrame {
             switch(VtCalcular2){
                 case "Fazendas":
                     QtSpinnerFazendas--;
+                    tela.QtFazendasM();
                 break;
                 case "Ferreiros":
                     QtSpinnerFerreiro--;
@@ -672,10 +672,10 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         lblCienciaTecValor.setText(Integer.toString(QtSpinnerCiencia));
         lblConstrucaoValor.setText(Integer.toString(QtSpinnerConstrucao));
-        lblFazendasValor.setText(Integer.toString(construtor.getQtFazendas()));
+        lblFazendasValor.setText(Integer.toString(QtSpinnerFazendas));
         lblExploradoresValor.setText(Integer.toString(QtSpinnerExploradores));
         lblFeiticariaValor.setText(Integer.toString(QtSpinnerFeiticaria));
-        lblFerreirosValor.setText(Integer.toString(construtor.getQtFerreiro()));
+        lblFerreirosValor.setText(Integer.toString(QtSpinnerFerreiro));
         lblSoldadoValor.setText(Integer.toString(QtSpinnerSoldados));
         lblMineradoresValor.setText(Integer.toString(QtSpinnerMineradores));
         

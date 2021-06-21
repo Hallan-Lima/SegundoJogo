@@ -17,20 +17,8 @@ public class ConstrutorJogo {
     private String nome;
     private String nomeReino;
     private int QtTrabalhadores;
-    private int QtFerreiro;
-    private int QtFazendas;
-
-    public void retorno(){
-        System.out.println(QtFazendas);
-    }
-
-    public int getQtFerreiro() {
-        return QtFerreiro;
-    }
-    public void setQtFerreiro(int qtFerreiro) {
-        QtFerreiro = qtFerreiro;
-    }
-
+    private String QtFazendas;
+  
     /**
      * @return the nome
      */
@@ -45,20 +33,6 @@ public class ConstrutorJogo {
         this.nome = nome;
     }
 
-    /**
-     * @return the nomeReino
-     */
-    public String getNomeReino() {
-        return nomeReino;
-    }
-
-    /**
-     * @param nomeReino the nomeReino to set
-     */
-    public void setNomeReino(String nomeReino) {
-        this.nomeReino = nomeReino;
-    }
-    
       /**
      * @return the QtTrabalhadores
      */
@@ -74,16 +48,30 @@ public class ConstrutorJogo {
     }
 
     /**
+     * @return the nomeReino
+     */
+    public String getNomeReino() {
+        return nomeReino;
+    }
+
+    /**
+     * @param nomeReino the nomeReino to set
+     */
+    public void setNomeReino(String nomeReino) {
+        this.nomeReino = nomeReino;
+    }
+
+    /**
      * @return the QtFazendas
      */
-    public int getQtFazendas() {
+    public String getQtFazendas() {
         return QtFazendas;
     }
 
     /**
      * @param QtFazendas the QtFazendas to set
      */
-    public void setQtFazendas(int QtFazendas) {
+    public void setQtFazendas(String QtFazendas) {
         this.QtFazendas = QtFazendas;
     }
 }
