@@ -15,7 +15,7 @@ import java.util.HashSet;
  */
 public class TelaTarefas extends javax.swing.JFrame {
     
-    int QtTrabalhadores, QtDisponivel, Vt, QtSpinnerFazendas, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,ValorSpinner=1;
+    int QtTrabalhadores, QtDisponivel, Vt, ValorSpinner=1;
     
     int VtCalcular;
     
@@ -536,77 +536,77 @@ public class TelaTarefas extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     void calcular(){
+
+        construtor.Leitor();
            
         if (1 == VtCalcular) {          //Somar
 
             switch(VtCalcular2){
                 case "Fazendas":
-                    QtSpinnerFazendas++;
-                    tela.QtFazendasS();
+                    construtor.QtSpinnerFazendas++;
                 break;
                 case "Ferreiros":
-                    QtSpinnerFerreiro++;
-                   // construtor.setQtFerreiro(QtSpinnerFerreiro);
+                    construtor.QtSpinnerFerreiro++;
                 break;
                 case "Ciencia":
-                    QtSpinnerCiencia++;
+                    construtor.QtSpinnerCiencia++;
                 break;
                 case "Construcao":
-                    QtSpinnerConstrucao++;
+                    construtor.QtSpinnerConstrucao++;
                 break;
                 case "Feiticaria":
-                    QtSpinnerFeiticaria++;
+                    construtor.QtSpinnerFeiticaria++;
                 break;
                 case "Mineradores":
-                    QtSpinnerMineradores++;
+                    construtor.QtSpinnerMineradores++;
                 break;
                 case "Soldados":
-                    QtSpinnerSoldados++;
+                    construtor.QtSpinnerSoldados++;
                 break;
                 case "Exploradores":
-                    QtSpinnerExploradores++;
+                    construtor.QtSpinnerExploradores++;
                 break;
             }
             
         }else{                      //Diminuir
             switch(VtCalcular2){
                 case "Fazendas":
-                    QtSpinnerFazendas--;
-                    tela.QtFazendasM();
+                    construtor.QtSpinnerFazendas--;
                 break;
                 case "Ferreiros":
-                    QtSpinnerFerreiro--;
+                    construtor.QtSpinnerFerreiro--;
                 break;
                 case "Ciencia":
-                    QtSpinnerCiencia--;
+                    construtor.QtSpinnerCiencia--;
                 break;
                 case "Construcao":
-                    QtSpinnerConstrucao--;
+                    construtor.QtSpinnerConstrucao--;
                 break;
                 case "Feiticaria":
-                    QtSpinnerFeiticaria--;
+                    construtor.QtSpinnerFeiticaria--;
                 break;
                 case "Mineradores":
-                    QtSpinnerMineradores--;
+                    construtor.QtSpinnerMineradores--;
                 break;
                 case "Soldados":
-                    QtSpinnerSoldados--;
+                    construtor.QtSpinnerSoldados--;
                 break;
                 case "Exploradores":
-                    QtSpinnerExploradores--;
+                    construtor.QtSpinnerExploradores--;
                 break;
             }
             
         }
     
-        
+        construtor.Escritor();
+        Atualizar();
     }
     
     void Atualizar(){
-        
-        calcular();
-        
-        QtDisponivel =  QtTrabalhadores-(QtSpinnerFazendas+QtSpinnerConstrucao+QtSpinnerFerreiro+QtSpinnerSoldados+QtSpinnerExploradores+QtSpinnerMineradores+QtSpinnerFeiticaria+QtSpinnerCiencia);                                // atualizando valor do funcionario trabalhando   
+
+        construtor.Leitor();
+       
+        QtDisponivel =  QtTrabalhadores-(construtor.QtSpinnerFazendas+construtor.QtSpinnerConstrucao+construtor.QtSpinnerFerreiro+construtor.QtSpinnerSoldados+construtor.QtSpinnerExploradores+construtor.QtSpinnerMineradores+construtor.QtSpinnerFeiticaria+construtor.QtSpinnerCiencia);                                // atualizando valor do funcionario trabalhando   
         lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
         
             if (QtDisponivel == 0) {
@@ -618,7 +618,7 @@ public class TelaTarefas extends javax.swing.JFrame {
             btnSoldadoSoma.setEnabled(false);
             btnMineradoresSoma.setEnabled(false);
             btnFeiticariaSoma.setEnabled(false);
-        }else{
+            }else{
             btnFazendaSoma.setEnabled(true);
             btnCienciaTecSoma.setEnabled(true);
             btnConstrucaoSoma.setEnabled(true);
@@ -629,152 +629,152 @@ public class TelaTarefas extends javax.swing.JFrame {
             btnFeiticariaSoma.setEnabled(true);
         }
             
-        if (QtSpinnerFazendas == 0) {
+        if (construtor.QtSpinnerFazendas == 0) {
             btnFazendaMenos.setEnabled(false);
         }else{
             btnFazendaMenos.setEnabled(true);
         }
-        if (QtSpinnerConstrucao == 0) {
+        if (construtor.QtSpinnerConstrucao == 0) {
             btnConstrucaoMenos.setEnabled(false);
         }else{
             btnConstrucaoMenos.setEnabled(true);
         }
-        if (QtSpinnerExploradores == 0) {
+        if (construtor.QtSpinnerExploradores == 0) {
             btnExploradoresMenos.setEnabled(false);
         }else{
             btnExploradoresMenos.setEnabled(true);
         }
-        if (QtSpinnerFeiticaria == 0) {
+        if (construtor.QtSpinnerFeiticaria == 0) {
             btnFeiticariaMenos.setEnabled(false);
         }else{
             btnFeiticariaMenos.setEnabled(true);
         }
-        if (QtSpinnerCiencia == 0) {
+        if (construtor.QtSpinnerCiencia == 0) {
             btnCienciaTecMenos.setEnabled(false);
         }else{
             btnCienciaTecMenos.setEnabled(true);
         }
-        if (QtSpinnerFerreiro == 0) {
+        if (construtor.QtSpinnerFerreiro == 0) {
             btnFerreirosMenos.setEnabled(false);
         }else{
             btnFerreirosMenos.setEnabled(true);
         }
-        if (QtSpinnerSoldados == 0) {
+        if (construtor.QtSpinnerSoldados == 0) {
             btnSoldadoMenos.setEnabled(false);
         }else{
             btnSoldadoMenos.setEnabled(true);
         }
-        if (QtSpinnerMineradores == 0) {
+        if (construtor.QtSpinnerMineradores == 0) {
             btnMineradoresMenos.setEnabled(false);
         }else{
             btnMineradoresMenos.setEnabled(true);
         }
 
-        lblCienciaTecValor.setText(Integer.toString(QtSpinnerCiencia));
-        lblConstrucaoValor.setText(Integer.toString(QtSpinnerConstrucao));
-        lblFazendasValor.setText(Integer.toString(QtSpinnerFazendas));
-        lblExploradoresValor.setText(Integer.toString(QtSpinnerExploradores));
-        lblFeiticariaValor.setText(Integer.toString(QtSpinnerFeiticaria));
-        lblFerreirosValor.setText(Integer.toString(QtSpinnerFerreiro));
-        lblSoldadoValor.setText(Integer.toString(QtSpinnerSoldados));
-        lblMineradoresValor.setText(Integer.toString(QtSpinnerMineradores));
+        lblCienciaTecValor.setText(Integer.toString(construtor.QtSpinnerCiencia));
+        lblConstrucaoValor.setText(Integer.toString(construtor.QtSpinnerConstrucao));
+        lblFazendasValor.setText(Integer.toString(construtor.QtSpinnerFazendas));
+        lblExploradoresValor.setText(Integer.toString(construtor.QtSpinnerExploradores));
+        lblFeiticariaValor.setText(Integer.toString(construtor.QtSpinnerFeiticaria));
+        lblFerreirosValor.setText(Integer.toString(construtor.QtSpinnerFerreiro));
+        lblSoldadoValor.setText(Integer.toString(construtor.QtSpinnerSoldados));
+        lblMineradoresValor.setText(Integer.toString(construtor.QtSpinnerMineradores));
         
     }
     
     private void btnFazendaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFazendaMenosActionPerformed
         VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Fazendas";     //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnFazendaMenosActionPerformed
 
     private void btnConstrucaoMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConstrucaoMenosActionPerformed
         VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Construcao";     //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnConstrucaoMenosActionPerformed
 
     private void btnFerreirosMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFerreirosMenosActionPerformed
         VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Ferreiros";     //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnFerreirosMenosActionPerformed
 
     private void btnSoldadoMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldadoMenosActionPerformed
         VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Soldados";     //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnSoldadoMenosActionPerformed
 
     private void btnExploradoresMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploradoresMenosActionPerformed
         VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Exploradores";     //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnExploradoresMenosActionPerformed
 
     private void btnFazendaSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFazendaSomaActionPerformed
         VtCalcular=1;       //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Fazendas";     //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnFazendaSomaActionPerformed
 
     private void btnConstrucaoSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConstrucaoSomaActionPerformed
         VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Construcao";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnConstrucaoSomaActionPerformed
 
     private void btnFerreirosSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFerreirosSomaActionPerformed
         VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Ferreiros";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnFerreirosSomaActionPerformed
 
     private void btnSoldadoSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSoldadoSomaActionPerformed
         VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Soldados";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnSoldadoSomaActionPerformed
 
     private void btnExploradoresSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExploradoresSomaActionPerformed
         VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Exploradores";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnExploradoresSomaActionPerformed
 
     private void btnFeiticariaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeiticariaMenosActionPerformed
         VtCalcular=2;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Feiticaria";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnFeiticariaMenosActionPerformed
 
     private void btnCienciaTecMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCienciaTecMenosActionPerformed
         VtCalcular=2;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Ciencia";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnCienciaTecMenosActionPerformed
 
     private void btnMineradoresMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMineradoresMenosActionPerformed
         VtCalcular=2;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Mineradores";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnMineradoresMenosActionPerformed
 
     private void btnFeiticariaSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFeiticariaSomaActionPerformed
         VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Feiticaria";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnFeiticariaSomaActionPerformed
 
     private void btnCienciaTecSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCienciaTecSomaActionPerformed
         VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Ciencia";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnCienciaTecSomaActionPerformed
 
     private void btnMineradoresSomaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMineradoresSomaActionPerformed
         VtCalcular=1;                   //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Mineradores";         //Variavel para informa qual item somar ou diminuir
-        Atualizar();
+        calcular();
     }//GEN-LAST:event_btnMineradoresSomaActionPerformed
 
     /**

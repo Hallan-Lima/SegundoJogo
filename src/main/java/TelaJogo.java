@@ -21,6 +21,7 @@ import javax.sound.sampled.SourceDataLine;
  * 
  * https://www.youtube.com/watch?v=qFfBVPnpw4w
  * 
+ * https://www.youtube.com/watch?v=xLDViuYlqGM
  * https://www.youtube.com/watch?v=sBoAecYJN0w
  * https://www.youtube.com/watch?v=Ics80J6JgGo
  * 
@@ -50,70 +51,6 @@ public class TelaJogo extends javax.swing.JFrame {
 
         nomeReino = construtor.getNomeReino();
     }
-
-    public void Escritor(){
-
-        try {
-            
-            FileOutputStream arquivo = new FileOutputStream("banco_de_dados.txt");
-            PrintWriter pr = new PrintWriter(arquivo);
-
-            //pr.println("Nome jogador ; "+ nome);
-            //pr.println("Nome reino ; "+ nomeReino);
-            //pr.println("QtTrabalhadores ; "+ QtTrabalhadores);
-            pr.println("QtFazendas ;"+ QtFazendas);
-
-            pr.close();
-            arquivo.close();
-
-
-        } catch (Exception e) {
-
-            System.out.println("Erro ao abrir arquivo");
-
-        }
-
-    }
-  
-    public void Leitor(){
-
-        try {
-            
-            FileInputStream arquivo = new FileInputStream("banco_de_dados.txt");
-            InputStreamReader input = new InputStreamReader(arquivo);
-            BufferedReader br = new BufferedReader(input);
-
-            String linha;
-
-            do {
-                linha = br.readLine();
-                if (linha != null) {
-
-                    String[] palavras = linha.split(";"); // pegar valor apos ;
-                    QtFazendas = Integer.parseInt(palavras[1]);
-                    System.out.println("BD :"+QtFazendas);
-                }
-            } while (linha != null);
-
-        } catch (Exception e) {
-
-            System.out.println("Erro ao abrir arquivo");
-
-        }
-
-    }
-  
-    public void QtFazendasS(){          //menos -1
-        Leitor();
-        QtFazendas++;
-        Escritor();
-    }
-    public void QtFazendasM(){          //somar +1
-        Leitor();
-        QtFazendas++;
-        Escritor();
-    }
-
    
     public void ContagemTempo(){                                    
 
@@ -1008,6 +945,7 @@ public class TelaJogo extends javax.swing.JFrame {
         construtor.setQtTrabalhadores(QtPessoas);          //enviar quanntidade de pessoas
         TelaTarefas tela = new TelaTarefas();             // criando obj
         tela.exportaTrabalhadores(construtor);               // enviar Quantidade de pessoas
+        tela.Atualizar();
         tela.setVisible(true);
     }//GEN-LAST:event_btnCentralActionPerformed
     

@@ -7,7 +7,10 @@
  */
 package Construtor;
 
+import java.io.BufferedReader;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStreamReader;
 import java.io.PrintWriter;
 
 /**
@@ -21,6 +24,64 @@ public class ConstrutorJogo {
     private String nomeReino;
     private int QtTrabalhadores;
     private String QtFazendas;
+
+    public int QtSpinnerFazendas, QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia;
+    
+   
+
+    public void Escritor(){
+
+        try {
+            
+            FileOutputStream arquivo = new FileOutputStream("banco_de_dados.txt");
+            PrintWriter pr = new PrintWriter(arquivo);
+
+            //pr.println("Nome jogador ;"+ nome);
+            //pr.println("Nome reino ;"+ nomeReino);
+            //pr.println("QtTrabalhadores ;"+ QtTrabalhadores);
+            pr.println("QtFazendas ;"+ QtSpinnerFazendas);
+
+            pr.close();
+            arquivo.close();
+
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao abrir arquivo: ");
+
+        }
+
+    }
+  
+    public void Leitor(){
+
+        try {
+            
+            FileInputStream arquivo = new FileInputStream("banco_de_dados.txt");
+            InputStreamReader input = new InputStreamReader(arquivo);
+            BufferedReader br = new BufferedReader(input);
+
+            String linha;
+
+            do {
+                linha = br.readLine();
+                if (linha != null) {
+
+                    String[] palavras = linha.split(";"); // pegar valor apos ;
+                    QtSpinnerFazendas = Integer.parseInt(palavras[1]);
+
+                    
+                }
+            } while (linha != null);
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao abrir arquivo");
+
+        }
+
+    }
+  
   
     /**
      * @return the nome
