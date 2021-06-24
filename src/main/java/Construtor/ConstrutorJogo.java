@@ -7,6 +7,9 @@
  */
 package Construtor;
 
+import java.io.FileOutputStream;
+import java.io.PrintWriter;
+
 /**
  *
  * @author hlima

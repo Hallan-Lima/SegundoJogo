@@ -1,12 +1,28 @@
 import Construtor.ConstrutorJogo;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
+
+import javax.sound.sampled.SourceDataLine;
 
 /**
  * @author hlima
  * 
  * Ctrl + Alt + K = para marcação
+ * 
+ *      #videos que ajudaram
+ * 
+ * 
+ * https://www.youtube.com/watch?v=qFfBVPnpw4w
+ * 
+ * https://www.youtube.com/watch?v=sBoAecYJN0w
+ * https://www.youtube.com/watch?v=Ics80J6JgGo
  * 
  */
 public class TelaJogo extends javax.swing.JFrame {
@@ -17,7 +33,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     int a=10000000, b=4000;     // variaveis do delay
     
-    String nome;                // nome do jogador
+    String nome, nomeReino;                // nome do jogador
     
     Random aleatorio = new Random();    //gerador de numeros
     
@@ -31,16 +47,71 @@ public class TelaJogo extends javax.swing.JFrame {
     public void exportaNome(ConstrutorJogo construtor) {            //pega o nome do usuario
         lblNomeReino.setText(construtor.getNomeReino());
         nome = construtor.getNome();
+
+        nomeReino = construtor.getNomeReino();
     }
-    
+
+    public void Escritor(){
+
+        try {
+            
+            FileOutputStream arquivo = new FileOutputStream("banco_de_dados.txt");
+            PrintWriter pr = new PrintWriter(arquivo);
+
+            //pr.println("Nome jogador ; "+ nome);
+            //pr.println("Nome reino ; "+ nomeReino);
+            //pr.println("QtTrabalhadores ; "+ QtTrabalhadores);
+            pr.println("QtFazendas ;"+ QtFazendas);
+
+            pr.close();
+            arquivo.close();
+
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao abrir arquivo");
+
+        }
+
+    }
+  
+    public void Leitor(){
+
+        try {
+            
+            FileInputStream arquivo = new FileInputStream("banco_de_dados.txt");
+            InputStreamReader input = new InputStreamReader(arquivo);
+            BufferedReader br = new BufferedReader(input);
+
+            String linha;
+
+            do {
+                linha = br.readLine();
+                if (linha != null) {
+
+                    String[] palavras = linha.split(";"); // pegar valor apos ;
+                    QtFazendas = Integer.parseInt(palavras[1]);
+                    System.out.println("BD :"+QtFazendas);
+                }
+            } while (linha != null);
+
+        } catch (Exception e) {
+
+            System.out.println("Erro ao abrir arquivo");
+
+        }
+
+    }
   
     public void QtFazendasS(){          //menos -1
+        Leitor();
         QtFazendas++;
-        System.out.println("jogo"+QtFazendas);
+        Escritor();
     }
     public void QtFazendasM(){          //somar +1
-        QtFazendas--;
-        System.out.println(QtFazendas);
+        Leitor();
+        QtFazendas++;
+        Escritor();
     }
 
    
