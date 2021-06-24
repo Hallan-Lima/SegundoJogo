@@ -1,0 +1,2 @@
+QtSpinnerFazendas,QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,nomeJogador,nomeReino
+2,8,0,0,0,0,0,0,null,null
