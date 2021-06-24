@@ -30,7 +30,6 @@ public class TelaTarefas extends javax.swing.JFrame {
      */
     public TelaTarefas() {
         initComponents();
-       
     }
     public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
         QtTrabalhadores = construtor.getQtTrabalhadores();
