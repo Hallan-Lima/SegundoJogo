@@ -530,16 +530,15 @@ public class TelaTarefas extends javax.swing.JFrame {
         setBounds(100, 100, 590, 419);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//botão fechar
         dispose();
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }
 
-    void calcular(){
+    void calcular(){                            // função para calcular qt. trabalhadores
 
         construtor.Leitor();
            
-        if (1 == VtCalcular) {          //Somar
-
+        if (1 == VtCalcular) {                       //Somar
             switch(VtCalcular2){
                 case "Fazendas":
                     construtor.QtSpinnerFazendas++;
@@ -566,8 +565,7 @@ public class TelaTarefas extends javax.swing.JFrame {
                     construtor.QtSpinnerExploradores++;
                 break;
             }
-            
-        }else{                      //Diminuir
+        }else{                                      //Diminuir
             switch(VtCalcular2){
                 case "Fazendas":
                     construtor.QtSpinnerFazendas--;
@@ -594,103 +592,110 @@ public class TelaTarefas extends javax.swing.JFrame {
                     construtor.QtSpinnerExploradores--;
                 break;
             }
-            
         }
     
         construtor.Escritor();
         Atualizar();
     }
     
-    void Atualizar(){
+    void Atualizar(){                          // função para atualizar os valores de funcionarios trabalhando
 
         construtor.Leitor();
        
-        QtDisponivel =  QtTrabalhadores-(construtor.QtSpinnerFazendas+construtor.QtSpinnerConstrucao+construtor.QtSpinnerFerreiro+construtor.QtSpinnerSoldados+construtor.QtSpinnerExploradores+construtor.QtSpinnerMineradores+construtor.QtSpinnerFeiticaria+construtor.QtSpinnerCiencia);                                // atualizando valor do funcionario trabalhando   
+        QtDisponivel =  QtTrabalhadores -   (construtor.QtSpinnerFazendas   +   construtor.QtSpinnerConstrucao  +   construtor.QtSpinnerFerreiro        +
+        construtor.QtSpinnerSoldados    +   construtor.QtSpinnerExploradores    +construtor.QtSpinnerMineradores    +   construtor.QtSpinnerFeiticaria  + construtor.QtSpinnerCiencia   );                                  // atualizando valor do funcionario trabalhando   
         lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
         
-            if (QtDisponivel == 0) {
-            btnFazendaSoma.setEnabled(false);
-            btnCienciaTecSoma.setEnabled(false);
-            btnConstrucaoSoma.setEnabled(false);
-            btnExploradoresSoma.setEnabled(false);
-            btnFerreirosSoma.setEnabled(false);
-            btnSoldadoSoma.setEnabled(false);
-            btnMineradoresSoma.setEnabled(false);
-            btnFeiticariaSoma.setEnabled(false);
-            }else{
-            btnFazendaSoma.setEnabled(true);
-            btnCienciaTecSoma.setEnabled(true);
-            btnConstrucaoSoma.setEnabled(true);
-            btnExploradoresSoma.setEnabled(true);
-            btnFerreirosSoma.setEnabled(true);
-            btnSoldadoSoma.setEnabled(true);
-            btnMineradoresSoma.setEnabled(true);
-            btnFeiticariaSoma.setEnabled(true);
+            if (QtDisponivel == 0) {                                //quando não tem mais nenhum funcionario
+                    btnFazendaSoma.setEnabled       (false);
+                    btnCienciaTecSoma.setEnabled    (false);
+                    btnConstrucaoSoma.setEnabled    (false);
+                    btnExploradoresSoma.setEnabled  (false);
+                    btnFerreirosSoma.setEnabled     (false);
+                    btnSoldadoSoma.setEnabled       (false);
+                    btnMineradoresSoma.setEnabled   (false);
+                    btnFeiticariaSoma.setEnabled    (false);
+            }else{                                                  //funcionarios disponiveis seja possitivo
+                    btnFazendaSoma.setEnabled       (true);
+                    btnCienciaTecSoma.setEnabled    (true);
+                    btnConstrucaoSoma.setEnabled    (true);
+                    btnExploradoresSoma.setEnabled  (true);
+                    btnFerreirosSoma.setEnabled     (true);
+                    btnSoldadoSoma.setEnabled       (true);
+                    btnMineradoresSoma.setEnabled   (true);
+                    btnFeiticariaSoma.setEnabled    (true);
         }
             
         if (construtor.QtSpinnerFazendas == 0) {
-            btnFazendaMenos.setEnabled(false);
+                btnFazendaMenos.setEnabled          (false);
         }else{
-            btnFazendaMenos.setEnabled(true);
-        }
-        if (construtor.QtSpinnerConstrucao == 0) {
-            btnConstrucaoMenos.setEnabled(false);
-        }else{
-            btnConstrucaoMenos.setEnabled(true);
-        }
-        if (construtor.QtSpinnerExploradores == 0) {
-            btnExploradoresMenos.setEnabled(false);
-        }else{
-            btnExploradoresMenos.setEnabled(true);
-        }
-        if (construtor.QtSpinnerFeiticaria == 0) {
-            btnFeiticariaMenos.setEnabled(false);
-        }else{
-            btnFeiticariaMenos.setEnabled(true);
-        }
-        if (construtor.QtSpinnerCiencia == 0) {
-            btnCienciaTecMenos.setEnabled(false);
-        }else{
-            btnCienciaTecMenos.setEnabled(true);
-        }
-        if (construtor.QtSpinnerFerreiro == 0) {
-            btnFerreirosMenos.setEnabled(false);
-        }else{
-            btnFerreirosMenos.setEnabled(true);
-        }
-        if (construtor.QtSpinnerSoldados == 0) {
-            btnSoldadoMenos.setEnabled(false);
-        }else{
-            btnSoldadoMenos.setEnabled(true);
-        }
-        if (construtor.QtSpinnerMineradores == 0) {
-            btnMineradoresMenos.setEnabled(false);
-        }else{
-            btnMineradoresMenos.setEnabled(true);
+                btnFazendaMenos.setEnabled          (true);
         }
 
-        lblCienciaTecValor.setText(Integer.toString(construtor.QtSpinnerCiencia));
-        lblConstrucaoValor.setText(Integer.toString(construtor.QtSpinnerConstrucao));
-        lblFazendasValor.setText(Integer.toString(construtor.QtSpinnerFazendas));
-        lblExploradoresValor.setText(Integer.toString(construtor.QtSpinnerExploradores));
-        lblFeiticariaValor.setText(Integer.toString(construtor.QtSpinnerFeiticaria));
-        lblFerreirosValor.setText(Integer.toString(construtor.QtSpinnerFerreiro));
-        lblSoldadoValor.setText(Integer.toString(construtor.QtSpinnerSoldados));
-        lblMineradoresValor.setText(Integer.toString(construtor.QtSpinnerMineradores));
+        if (construtor.QtSpinnerConstrucao == 0) {
+                btnConstrucaoMenos.setEnabled       (false);
+        }else{
+                btnConstrucaoMenos.setEnabled       (true);
+        }
+
+        if (construtor.QtSpinnerExploradores == 0) {
+            btnExploradoresMenos.setEnabled         (false);
+        }else{
+            btnExploradoresMenos.setEnabled         (true);
+        }
+
+        if (construtor.QtSpinnerFeiticaria == 0) {
+            btnFeiticariaMenos.setEnabled           (false);
+        }else{
+            btnFeiticariaMenos.setEnabled           (true);
+        }
+
+        if (construtor.QtSpinnerCiencia == 0) {
+            btnCienciaTecMenos.setEnabled       (false);
+        }else{
+            btnCienciaTecMenos.setEnabled       (true);
+        }
+
+        if (construtor.QtSpinnerFerreiro == 0) {
+            btnFerreirosMenos.setEnabled        (false);
+        }else{
+            btnFerreirosMenos.setEnabled        (true);
+        }
+
+        if (construtor.QtSpinnerSoldados == 0) {
+            btnSoldadoMenos.setEnabled          (false);
+        }else{
+            btnSoldadoMenos.setEnabled          (true);
+        }
+
+        if (construtor.QtSpinnerMineradores == 0) {
+            btnMineradoresMenos.setEnabled      (false);
+        }else{
+            btnMineradoresMenos.setEnabled      (true);
+        }
+
+        lblCienciaTecValor.setText      (Integer.toString(construtor.QtSpinnerCiencia       ));
+        lblConstrucaoValor.setText      (Integer.toString(construtor.QtSpinnerConstrucao    ));
+        lblFazendasValor.setText        (Integer.toString(construtor.QtSpinnerFazendas      ));
+        lblExploradoresValor.setText    (Integer.toString(construtor.QtSpinnerExploradores  ));
+        lblFeiticariaValor.setText      (Integer.toString(construtor.QtSpinnerFeiticaria    ));
+        lblFerreirosValor.setText       (Integer.toString(construtor.QtSpinnerFerreiro      ));
+        lblSoldadoValor.setText         (Integer.toString(construtor.QtSpinnerSoldados      ));
+        lblMineradoresValor.setText     (Integer.toString(construtor.QtSpinnerMineradores   ));
         
     }
     
-    private void btnFazendaMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFazendaMenosActionPerformed
-        VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
-        VtCalcular2="Fazendas";     //Variavel para informa qual item somar ou diminuir
+    private void btnFazendaMenosActionPerformed(java.awt.event.ActionEvent evt) {
+        VtCalcular=2;                           //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Fazendas";                 //Variavel para informa qual item somar ou diminuir
         calcular();
-    }//GEN-LAST:event_btnFazendaMenosActionPerformed
+    }
 
-    private void btnConstrucaoMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConstrucaoMenosActionPerformed
-        VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)
-        VtCalcular2="Construcao";     //Variavel para informa qual item somar ou diminuir
+    private void btnConstrucaoMenosActionPerformed(java.awt.event.ActionEvent evt) {
+        VtCalcular=2;                   //variavel para informa se é mais ou menos (1=mais)
+        VtCalcular2="Construcao";       //Variavel para informa qual item somar ou diminuir
         calcular();
-    }//GEN-LAST:event_btnConstrucaoMenosActionPerformed
+    }
 
     private void btnFerreirosMenosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnFerreirosMenosActionPerformed
         VtCalcular=2;       //variavel para informa se é mais ou menos (1=mais)

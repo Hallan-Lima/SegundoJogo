@@ -86,8 +86,7 @@ public class ConstrutorJogo {
         }
 
     }
-  
-  
+    
     /**
      * @return the nome
      */

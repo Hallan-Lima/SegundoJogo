@@ -26,7 +26,8 @@ public class TelaJogo extends javax.swing.JFrame {
      */
     int StatusTristezaPessoas,      StatusTristezaAlimentos,    StatusTristezaRiquezas, StatusTristezaSoldados,
     	StatusRaivaPessoas, 	    StatusRaivaRiquezas,    	StatusRaivaArmas,   	StatusRaivaSoldados,
-        StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	StatusFelicidadeArmas,	    StatusFelicidadeSoldados,   StatusSoma,             sentimento10,
+        StatusFelicidadePessoas,	StatusFelicidadeAlimentos,	StatusFelicidadeVilas,	StatusFelicidadeRiquezas,	
+        StatusFelicidadeArmas,	    StatusFelicidadeSoldados,   StatusSoma,             sentimento10,
         sentimento20,               sentimento30,               sentimento40,           sentimento50, 
         StatusFelicidade,           StatusTristeza,             StatusRaiva,            QtRodada,
         QtRiquezas,                 QtArmas,                    QtSoldados,             Status, 
@@ -56,7 +57,9 @@ public class TelaJogo extends javax.swing.JFrame {
         QtRodada++;
 
         if (QtRodada == 3) {
-            QtDias++;
+                QtDias++;
+                Fazendas();
+                QtRodada=0;
         }else{};
 
         Timer timer = new Timer();
@@ -193,7 +196,7 @@ public class TelaJogo extends javax.swing.JFrame {
    
     void Historia(){                                                // função da historia do jogo              
 
-        Valor           = aleatorio.nextInt(5)+1;
+        Valor           = aleatorio.nextInt(7)+1;
         sentimento10    = (aleatorio.nextInt(10)+5);
         sentimento20    = (aleatorio.nextInt(20)+5);
         sentimento30    = (aleatorio.nextInt(30)+5);
@@ -271,7 +274,26 @@ public class TelaJogo extends javax.swing.JFrame {
                 btnOp3.setText("Não");
                 Vt=16;              //Numero da historia nos botões
             break;
-        }
+            case 7:
+                if (construtor.QtSpinnerFazendas > 0) {
+
+                    lblMsg.setText("<html>Sr."+nome+"<br/>Alguns dos fazendeiros<br/>estão com medo.<br/><br/>O que devemos fazer?</html>");
+                    btnOp1.setText("Fale que ficara tudo bem");
+                    btnOp2.setText("São apenas medrosos");
+                    btnOp3.setText("Mande alguem proteger eles");
+                    Vt=17;              //Numero da historia nos botões        
+                    
+                } else {
+
+                    lblMsg.setText("<html>Sr."+nome+"<br/>Alguns ladrões chegaram na vila<br/><br/>O que devemos fazer?</html>");
+                    btnOp1.setText("Fique de olho");
+                    btnOp2.setText("Mate eles!");
+                    btnOp3.setText("Proteja as riquezas");
+                    Vt=18;              //Numero da historia nos botões  
+                    
+                }
+            break;
+            }
         }
     }
 
@@ -354,6 +376,8 @@ public class TelaJogo extends javax.swing.JFrame {
 
     void Jogo(){                                                    // função raiz para o jogo
                 
+        construtor.Leitor();
+        
         if (QtPessoas <= 0 || QtAlimentos <=0 || QtVilas <= 0) {        //validação de vida
             lblMsg.setText("<html>Infelizmente seu reino <br/> não deu certo <br/><br/> Boa sorte na proxima! </html>");
             LimparOp();
@@ -381,13 +405,17 @@ public class TelaJogo extends javax.swing.JFrame {
         //analise das variaveis
         debug++;
         System.out.println("----/Inicio/----- "+debug);
-        construtor.Leitor();
-        System.out.println("valores: "+construtor.QtSpinnerFazendas);
         System.out.println("----/Fim/-----");
         }
 
     }
     
+    void Fazendas (){
+
+        Valor = ((construtor.QtSpinnerFazendas/10)+(sentimento50/10));
+        QtAlimentos += Valor;
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -783,6 +811,28 @@ public class TelaJogo extends javax.swing.JFrame {
                 StatusFelicidadePessoas += sentimento50;
                 }
             break;
+            case 17:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. eles ficam mais seguros<br/>com as suas palavras.<html/>");
+                    StatusFelicidadePessoas += sentimento10;
+                } else {
+                    lblMsg.setText("<html>Sr. eles não se sentiram muito seguro,<br/>com as suas palavras.<html/>");
+                    QtAlimentos -=  sentimento10;
+                }
+            break;
+            case 18:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. eles acabaram roubando alguns alimentos.<html/>");
+                    QtAlimentos                 -=  sentimento10;
+                    StatusRaivaPessoas          +=  sentimento10;
+                    StatusFelicidadePessoas     -=  sentimento10;
+                } else {
+                    lblMsg.setText("<html>Sr. eles acabaram roubando alguns alimentos.<html/>");
+                    QtAlimentos                 -=  sentimento20;
+                    StatusRaivaPessoas          +=  sentimento30;
+                    StatusFelicidadePessoas     -=  sentimento20;
+                }
+            break;
             
         }
         LimparOp();
@@ -851,6 +901,28 @@ public class TelaJogo extends javax.swing.JFrame {
                 StatusRaivaPessoas += sentimento50;
                 }
             break;
+            case 17:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>Sr. os fazendeiros ficaram irritados.<html/>");
+                    StatusRaivaPessoas += sentimento30;
+                } else {
+                    lblMsg.setText("<html>Sr. alguns fazendeiros jogaram frutas em<br/>alguns dos nossos soldados falaram.<html/>");
+                    QtAlimentos         -= sentimento10;
+                    StatusRaivaPessoas  += sentimento50;
+                }
+            break;
+            case 18:    //Historia
+                if (1 == (aleatorio.nextInt(2))) {
+                    lblMsg.setText("<html>Sr. matamos todos eles!<html/>");
+                    StatusFelicidadePessoas     +=  sentimento10;
+                    StatusRaivaPessoas          +=  sentimento10;
+                } else {
+                    lblMsg.setText("<html>Sr. matamos eles, mas eles<br/>mataram alguns dos nossos tambem.<html/>");
+                    QtPessoas                   -= (sentimento50/10);
+                    StatusRaivaPessoas          += sentimento30;
+                    StatusTristezaPessoas       += sentimento40;
+                }
+            break;
 
         }
     
@@ -916,17 +988,35 @@ public class TelaJogo extends javax.swing.JFrame {
             case 22:    //Historia
                 if (1 == (aleatorio.nextInt(2)+1)) {
                     lblMsg.setText("<html>Sr. algumas pessoas se mataram.<html/>");
-                    QtPessoas -= (sentimento30/10);
-                    StatusRaivaPessoas += sentimento20;
+                    QtPessoas               -= (sentimento30/10);
+                    StatusRaivaPessoas      += sentimento20;
                     StatusFelicidadePessoas -= sentimento30;
                 } else {
                     lblMsg.setText("<html>OK Sr.<html/>");
-                    StatusRaivaPessoas += sentimento10;
+                    StatusRaivaPessoas      += sentimento10;
                     StatusFelicidadePessoas -= sentimento20;
                 }
             break;
-      
-
+            case 17:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>OK Sr.<html/>");
+                    StatusFelicidadePessoas += sentimento10;
+                } else {
+                    lblMsg.setText("<html>OK Sr. eles ficaram feliz.<html/>");
+                    StatusFelicidadePessoas += sentimento20;
+                }
+            break;
+            case 18:    //Historia
+                if (1 == (aleatorio.nextInt(2)+1)) {
+                    lblMsg.setText("<html>OK Sr.<html/>");
+                    StatusFelicidadePessoas     -= sentimento30;
+                    StatusFelicidadeRiquezas    += sentimento20;
+                } else {
+                    lblMsg.setText("<html>Sr. as pessoas não gostaram.<html/>");
+                    StatusFelicidadePessoas     -= sentimento50;
+                    StatusRaivaPessoas          += sentimento30;
+                }
+            break;
         }
  
          LimparOp();
