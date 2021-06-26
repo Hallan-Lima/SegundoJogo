@@ -1,8 +1,8 @@
 /*
  * Link de videos que ajudaram
  *
- * https://www.youtube.com/watch?v=-V66mnoUGG8      // como colocar um personagem e fazer ele se mexer
- * https://www.youtube.com/watch?v=gEI_bj5t7fo      // Tutorial Java Passando variáveis entre janelas
+ * https://www.youtube.com/watch?v=-V66mnoUGG8      --> como colocar um personagem e fazer ele se mexer
+ * https://www.youtube.com/watch?v=gEI_bj5t7fo      --> Tutorial Java Passando variáveis entre janelas
  * 
  *      #videos que ajudaram
  * 
@@ -41,7 +41,7 @@ public class ConstrutorJogo {
             pr.println("QtSpinnerFazendas,QtSpinnerConstrucao,QtSpinnerFerreiro,QtSpinnerSoldados,QtSpinnerExploradores,QtSpinnerMineradores,QtSpinnerFeiticaria,QtSpinnerCiencia,nomeJogador,nomeReino");                  // cabeçalho do banco de dados
             pr.println(QtSpinnerFazendas    +","+   QtSpinnerConstrucao +","+   QtSpinnerFerreiro   +","+   QtSpinnerSoldados   +","+   
             QtSpinnerExploradores   +","+   QtSpinnerMineradores    +","+   QtSpinnerFeiticaria +","+   QtSpinnerCiencia    +","+
-            nome    +","+   getNomeReino());                                                // variavel que serão armazenadas 
+            nome    +","+   nomeReino);                                                // variavel que serão armazenadas 
 
             pr.close();
             arquivo.close();
@@ -66,7 +66,7 @@ public class ConstrutorJogo {
                 linha = br.readLine();
                 if (linha != null) {
 
-                    String[] vect = linha.split(",");                           // pegar valor apos ;
+                    String[] vect = linha.split(",");                           // pegar valor apos
                     QtSpinnerFazendas       = Integer.parseInt(vect[0]);
                     QtSpinnerConstrucao     = Integer.parseInt(vect[1]);
                     QtSpinnerFerreiro       = Integer.parseInt(vect[2]);
@@ -75,6 +75,8 @@ public class ConstrutorJogo {
                     QtSpinnerMineradores    = Integer.parseInt(vect[5]);
                     QtSpinnerFeiticaria     = Integer.parseInt(vect[6]);
                     QtSpinnerCiencia        = Integer.parseInt(vect[7]);
+                    nome                    = vect[8];
+                    nomeReino               = vect[9];
 
                 }
             } while (linha != null);

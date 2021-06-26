@@ -1,8 +1,4 @@
-
 import Construtor.ConstrutorJogo;
-import java.util.Locale;
-
-import javax.sound.sampled.SourceDataLine;
 
 /**
  *

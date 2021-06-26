@@ -1,20 +1,19 @@
 import Construtor.ConstrutorJogo;
-
-import java.io.BufferedReader;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.Random;
 import java.util.Timer;
 import java.util.TimerTask;
-
-import javax.sound.sampled.SourceDataLine;
-
 /**
  * @author hlima
  * 
  * Ctrl + Alt + K = para marcação
+ * 
+ *  NAVEGAÇÃO RAPIDA
+ * 
+ * -> topicos importantes começa com '#'
+ * 
+ * Sair, Opções123, 
+ * 
+ * FAZER    --> comentarios que precisa implementar melhoria
  * 
  * 
  */
@@ -24,6 +23,7 @@ public class TelaJogo extends javax.swing.JFrame {
      * Vt           -> variavel temporaria
      * delay        -> tempo para realizar o delay
      * QtTurno      -> qt de dias para gerar uma "tecnologia"...
+     * Valor        -> variavel temporaria
      */
     int StatusTristezaPessoas,      StatusTristezaAlimentos,    StatusTristezaRiquezas, StatusTristezaSoldados,
     	StatusRaivaPessoas, 	    StatusRaivaRiquezas,    	StatusRaivaArmas,   	StatusRaivaSoldados,
@@ -35,12 +35,11 @@ public class TelaJogo extends javax.swing.JFrame {
         Vt,                         VtPrimeirosPassos=0,        Valor,                  debug=0, 
         QtDias,                     QtTrabalhadores,            QtFazendas,             VtHistoria,
         QtAlimentos=100,            QtPessoas=10,               QtVilas=1,              delay1=10000000,
-        delay2=4000,                QtTurnos;
+        delay2=4000,                QtTurnos,                   QtMoedas,                QtBarraOuro;
     
     String nome;                                                // nome do jogador
     
     Random aleatorio = new Random();                            // gerador de numeros
-    
     ConstrutorJogo construtor = new ConstrutorJogo();
 
     public TelaJogo() {                                             // função para iniciar programa
@@ -67,8 +66,8 @@ public class TelaJogo extends javax.swing.JFrame {
                 
             QtDias++;
             Fazendas();
+            Minerador();
             QtRodada=0;
-
 
         }else{};
 
@@ -421,11 +420,11 @@ public class TelaJogo extends javax.swing.JFrame {
 
     }
     
-    void Fazendas (){                                               // função para quando tiver fazendas
+    void Fazendas(){                                               // função para quando tiver fazendas
 
         if (construtor.QtSpinnerFazendas > 0) {
         
-            Valor = ((construtor.QtSpinnerFazendas/10)+(sentimento50/10));
+            Valor = ((construtor.QtSpinnerFazendas/(sentimento30/10)));
             QtAlimentos += Valor;
             
         } else {                                                    // sem funcionarios não faz nada
@@ -433,7 +432,7 @@ public class TelaJogo extends javax.swing.JFrame {
         }
     }
 
-    void Soldados (){
+    void Soldados(){                                                // função para criar soldados
 
         if ((construtor.QtSpinnerSoldados != 0) && (QtSoldados <= QtPessoas)) {
             QtSoldados += construtor.QtSpinnerSoldados;
@@ -442,7 +441,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     }
 
-    void CienciaTec(){
+    void CienciaTec(){                                              // função para expandir a ciencia e tecnologia
 
         if (construtor.QtSpinnerCiencia > 0) {
             
@@ -462,22 +461,35 @@ public class TelaJogo extends javax.swing.JFrame {
 
     }
 
+    void Construcao(){                                              // função para criar vilas, casas, comercios... 
+
+        if (construtor.QtSpinnerConstrucao > 0) {
+          //criar vilas
+        }
+
+    }
+
+    void Minerador(){                                               // função para criar riqueza a vila
+        if (construtor.QtSpinnerMineradores > 0) {
+
+            QtMoedas += (construtor.QtSpinnerMineradores/3);            //gerador de moeda
+
+            if ((aleatorio.nextInt(5) == 2)) {
+                QtBarraOuro++;                                          //gerador de barra de ouro
+            } else {
+                
+            }
+        }
+    }
+
     void Debug(){
 
         if (QtSoldados > QtPessoas) {
             QtSoldados = QtPessoas;
         }
 
-        Valor = (construtor.QtSpinnerCiencia + construtor.QtSpinnerConstrucao + construtor.QtSpinnerExploradores + construtor.QtSpinnerFazendas + 
-        construtor.QtSpinnerFeiticaria + construtor.QtSpinnerFerreiro + construtor.QtSpinnerMineradores + construtor.QtSpinnerSoldados  );
-
-        while (Valor > QtPessoas) {
-
-            //https://www.youtube.com/watch?v=JGu84T1QPHU       --> como encontrar o maior valor
-            
-        }
+        // validar quantidade de pessoas e ajustar automaticamente #FAZER
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -832,7 +844,9 @@ public class TelaJogo extends javax.swing.JFrame {
                     lblMsg.setText("<html>Sr. enviamos comida e a <br/>outra vila ficou muito feliz<br/> com a aliança, mandaram <br/> alguns soldados em retribuição<br/> da nova amizade!<html/>");
                     QtAlimentos-=10;
                     StatusFelicidadePessoas += sentimento10;
-                    QtSoldados += (aleatorio.nextInt(5)+2);
+                    Valor       += (aleatorio.nextInt(5)+2);
+                    QtPessoas   += Valor;
+                    QtSoldados  += Valor;
                 } else {
                 lblMsg.setText("<html>Enviamos comida!<br/>Todos ficaram felizes!<html/>");
                 QtAlimentos-=10;

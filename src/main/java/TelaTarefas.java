@@ -1,7 +1,4 @@
-import javax.sound.sampled.SourceDataLine;
-
 import Construtor.ConstrutorJogo;
-import java.util.HashSet;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
