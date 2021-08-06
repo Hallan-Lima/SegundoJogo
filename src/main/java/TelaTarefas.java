@@ -12,7 +12,7 @@ import Construtor.ConstrutorJogo;
  */
 public class TelaTarefas extends javax.swing.JFrame {
     
-    int QtTrabalhadores, QtDisponivel, Vt, ValorSpinner=1;
+    public int QtTrabalhadores, QtDisponivel, Vt, ValorSpinner=1;
     
     int VtCalcular;
     
@@ -21,13 +21,13 @@ public class TelaTarefas extends javax.swing.JFrame {
     TelaJogo tela = new TelaJogo ();
     ConstrutorJogo construtor = new ConstrutorJogo();
 
-
     /**
      * Creates new form TelaBolsa
      */
     public TelaTarefas() {
         initComponents();
     }
+    
     public void exportaTrabalhadores(ConstrutorJogo construtor) {            //pega o nome do usuario
         QtTrabalhadores = construtor.getQtTrabalhadores();
     }
@@ -80,7 +80,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jList1 = new javax.swing.JList<>();
         jLabel5 = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnSairTarefas = new javax.swing.JButton();
         lblQtPessoasDisponiveis = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -468,8 +468,8 @@ public class TelaTarefas extends javax.swing.JFrame {
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Central de Tarefas");
 
-        jButton1.setText("Sair");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnSairTarefas.setText("Sair");
+        btnSairTarefas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -492,7 +492,7 @@ public class TelaTarefas extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(lblQtPessoasDisponiveis)
                         .addGap(82, 82, 82)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btnSairTarefas, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTabbedPane1))
                 .addContainerGap())
@@ -506,7 +506,7 @@ public class TelaTarefas extends javax.swing.JFrame {
                 .addComponent(jTabbedPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 308, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnSairTarefas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(lblQtPessoasDisponiveis, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
@@ -529,6 +529,7 @@ public class TelaTarefas extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//botão fechar
         dispose();
+        tela.Jogo();
     }
 
     void calcular(){                            // função para calcular qt. trabalhadores
@@ -599,11 +600,17 @@ public class TelaTarefas extends javax.swing.JFrame {
 
         construtor.Leitor();
        
-        QtDisponivel =  QtTrabalhadores -   (construtor.QtSpinnerFazendas   +   construtor.QtSpinnerConstrucao  +   construtor.QtSpinnerFerreiro        +
+        QtDisponivel =  QtTrabalhadores - (construtor.QtSpinnerFazendas   +   construtor.QtSpinnerConstrucao  +   construtor.QtSpinnerFerreiro        +
         construtor.QtSpinnerSoldados    +   construtor.QtSpinnerExploradores    +construtor.QtSpinnerMineradores    +   construtor.QtSpinnerFeiticaria  + construtor.QtSpinnerCiencia   );                                  // atualizando valor do funcionario trabalhando   
         lblQtPessoasDisponiveis.setText("Qt Pessoas disponiveis :"+QtDisponivel);
         
-            if (QtDisponivel == 0) {                                //quando não tem mais nenhum funcionario
+        if (QtDisponivel < 0) {
+            btnSairTarefas.setEnabled(false);
+        } else {
+            btnSairTarefas.setEnabled(true);
+        }
+
+            if (QtDisponivel <= 0) {                                //quando não tem mais nenhum funcionario
                     btnFazendaSoma.setEnabled       (false);
                     btnCienciaTecSoma.setEnabled    (false);
                     btnConstrucaoSoma.setEnabled    (false);
@@ -681,7 +688,7 @@ public class TelaTarefas extends javax.swing.JFrame {
         lblMineradoresValor.setText     (Integer.toString(construtor.QtSpinnerMineradores   ));
         
     }
-    
+
     private void btnFazendaMenosActionPerformed(java.awt.event.ActionEvent evt) {
         VtCalcular=2;                           //variavel para informa se é mais ou menos (1=mais)
         VtCalcular2="Fazendas";                 //Variavel para informa qual item somar ou diminuir
@@ -831,7 +838,7 @@ public class TelaTarefas extends javax.swing.JFrame {
     private javax.swing.JButton btnMineradoresSoma;
     private javax.swing.JButton btnSoldadoMenos;
     private javax.swing.JButton btnSoldadoSoma;
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnSairTarefas;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;

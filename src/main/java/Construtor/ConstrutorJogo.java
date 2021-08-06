@@ -31,6 +31,7 @@ public class ConstrutorJogo {
     private     int     QtTrabalhadores;
     public      int     QtSpinnerFazendas,   QtSpinnerConstrucao,    QtSpinnerFerreiro,  QtSpinnerSoldados,  QtSpinnerExploradores,
     QtSpinnerMineradores,   QtSpinnerFeiticaria,    QtSpinnerCiencia;
+    public      boolean isRunning;
 
     public void Escritor(){
         try {
@@ -88,59 +89,35 @@ public class ConstrutorJogo {
         }
 
     }
-    
-    /**
-     * @return the nome
-     */
+
     public String getNome() {
         return nome;
     }
 
-    /**
-     * @param nome the nome to set
-     */
     public void setNome(String nome) {
         this.nome = nome;
     }
 
-      /**
-     * @return the QtTrabalhadores
-     */
     public int getQtTrabalhadores() {
         return QtTrabalhadores;
     }
 
-    /**
-     * @param QtTrabalhadores the QtTrabalhadores to set
-     */
     public void setQtTrabalhadores(int QtTrabalhadores) {
         this.QtTrabalhadores = QtTrabalhadores;
     }
 
-    /**
-     * @return the nomeReino
-     */
     public String getNomeReino() {
         return nomeReino;
     }
 
-    /**
-     * @param nomeReino the nomeReino to set
-     */
     public void setNomeReino(String nomeReino) {
         this.nomeReino = nomeReino;
     }
 
-    /**
-     * @return the QtFazendas
-     */
     public String getQtFazendas() {
         return QtFazendas;
     }
 
-    /**
-     * @param QtFazendas the QtFazendas to set
-     */
     public void setQtFazendas(String QtFazendas) {
         this.QtFazendas = QtFazendas;
     }

@@ -121,13 +121,13 @@ public class TelaInicial extends javax.swing.JFrame {
         // Abrir tela do jogo
    
         if((txtNome.getText().isEmpty() == false) && (txtNomeReino.getText().isEmpty() == false)){            //comando para verificar se tem algum texto
+            construtor.Escritor();                      // zerar BD ao iniciar
             construtor.setNome(txtNome.getText());                 // pegar nome
             construtor.setNomeReino(txtNomeReino.getText());      // pegar nome reino
  
             TelaJogo tela = new TelaJogo();             // criando obj
             tela.exportaNome(construtor);               // enviar nome
             
-            construtor.Escritor();                      // zerar BD ao iniciar
 
             tela.setVisible(true);                      // chamando tela
             dispose();                                  // fechando tela inicial
