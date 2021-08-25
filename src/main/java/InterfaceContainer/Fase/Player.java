@@ -12,9 +12,9 @@ public class Player {
     private int altura, largura;
     private Image imagem;
 
-    public Player(){
-        this.x = 100;
-        this.y = 100;           //local de nacimento
+    public Player(){                //local de nacimento
+        this.x = 250;
+        this.y = 500;           
     }
 
     public void load() {
@@ -47,19 +47,19 @@ public class Player {
     int codigo = tecla.getKeyCode();
     
     if(codigo == KeyEvent.VK_UP){
-            dy=-3;
+            dy=-2;
     }    
     
     if(codigo == KeyEvent.VK_DOWN){
-            dy=3;
+            dy=2;
     }    
     
     if(codigo == KeyEvent.VK_LEFT){
-            dx=-3;
+            dx=-2;
     }    
     
     if(codigo == KeyEvent.VK_RIGHT){
-            dx=3;
+            dx=2;
     }    }
         
     public void keyRelease(KeyEvent tecla){         //quando parar de precionar a tecla

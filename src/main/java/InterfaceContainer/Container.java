@@ -11,7 +11,7 @@ public class Container extends JFrame{
       
         add(new Fase());
         setTitle("Meu Jogo");                                       //titulo da tela
-        setSize(590,419);                                          //largura da tela
+        setSize(1024,720);                                          //largura da tela
         setLocationRelativeTo(null);                                //centralizar                
         this.setResizable(false);                                   //para não maximixar
         setVisible(true);
