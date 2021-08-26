@@ -22,7 +22,7 @@ public class Fase extends JPanel implements ActionListener {
         setFocusable(true);
         setDoubleBuffered(true);
         
-        ImageIcon referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\fundoteste.png");               // achar o caminho
+        ImageIcon referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\fundoteste.png");
         fundo = referencia.getImage();
         
         player = new Player();
