@@ -3,7 +3,6 @@ package InterfaceContainer.Fase;
 import javax.swing.ImageIcon;
 import java.awt.Image;
 import java.awt.event.KeyEvent;
-import sun.awt.AWTAccessor;
 
 public class Player {
 
@@ -104,77 +103,63 @@ public class Player {
 
     public void personagemUp() {
 
-        if (personagem > 27) {
-            personagem=0;
-        }
+        ImageIcon referencia;
 
-        switch (personagem) {
-            case 1:
-                
-            ImageIcon referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up1.png");
+        personagem++;
+
+        System.out.println(personagem);
+
+        if (personagem == 1) {
+            
+            referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up1.png");
             imagem = referencia.getImage();
 
-                break;
-            case 3:
-                
+        }if (personagem == 2) {
+
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up2.png");
             imagem = referencia.getImage();
 
-                break;
-            case 6:
-            
+        }if (personagem == 3) {
+
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up3.png");
             imagem = referencia.getImage();
-            
-                break;
-            case 9:
-        
+
+        }if (personagem == 4) {
+
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up4.png");
             imagem = referencia.getImage();
-            
-                break;
-            case 12:
-        
+
+        }if (personagem == 5) {
+
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up5.png");
             imagem = referencia.getImage();
-            
-                break;
-            case 15:
-        
+
+        }if (personagem == 6) {
+
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up6.png");
             imagem = referencia.getImage();
-            
-                break;
-            case 18:
-    
+
+        }if (personagem == 7) {
+
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up7.png");
             imagem = referencia.getImage();
-            
-                break;
-            case 21:
+
+        }if (personagem == 8) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up8.png");
             imagem = referencia.getImage();
-                
-                break;
-            case 24:
+
+        }if (personagem == 9) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up9.png");
             imagem = referencia.getImage();
-            
-                break;
 
-            case 27:
+        }if (personagem == 10) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up10.png");
             imagem = referencia.getImage();
-
-            personagem = 0;
-                break;
-        
-            default:
-
-                break;
+        }if (personagem >= 11) {
+            personagem  = 0;
         }
 
     }
@@ -353,15 +338,11 @@ public class Player {
     public void keyPressed(KeyEvent tecla){             //comando para movimentar o player
     int codigo = tecla.getKeyCode();
     
-    System.out.println(personagem);
-    
     if(codigo == KeyEvent.VK_UP){
         if (this.y < 60) {
             dy=0;               
         } else {
-            dy=-2;    
-            personagem++;
-            personagemUp();
+            dy=-1;    
         }
     }    
     
@@ -369,9 +350,9 @@ public class Player {
         if (this.y > 600) {
             dy=0;               
         } else {
-            dy=2;  
             personagem++;
             personagemDown();
+            dy=1;  
         }
     }    
     
@@ -379,9 +360,9 @@ public class Player {
         if (this.x < 60) {
             dx=0;               
         } else {
-            dx=-2;   
             personagem++;
             personagemLeft();           
+            dx=-1;   
         }
     }    
     
@@ -389,17 +370,15 @@ public class Player {
         if (this.x > 950) {
             dx=0;
         } else {
-            dx=2;
             personagem++;
             personagemRight();
+            dx=1;
         }
     }    
 }
 
     public void keyRelease(KeyEvent tecla){         //quando parar de precionar a tecla
     int codigo = tecla.getKeyCode();
-    
-    personagem=0;
 
     if(codigo == KeyEvent.VK_UP){
             dy=0;

@@ -11,11 +11,13 @@ import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+
 public class Fase extends JPanel implements ActionListener {
     
     private final Image fundo;
     private final Player player;
     private final Timer timer;
+
 
     public Fase(){
 
@@ -27,6 +29,7 @@ public class Fase extends JPanel implements ActionListener {
         
         player = new Player();
         player.load();
+        
         
         addKeyListener(new TecladoAdapter());
 
@@ -54,7 +57,17 @@ public class Fase extends JPanel implements ActionListener {
     
         @Override
         public void keyPressed(KeyEvent e){
+            int codigo = e.getKeyCode();
+            
+            if(codigo == KeyEvent.VK_UP){
+
+                player.personagemUp();
+                System.out.println("teste");
+
+            }    
+
             player.keyPressed(e);
+            
         }
         
         @Override
