@@ -17,6 +17,7 @@ public class Fase extends JPanel implements ActionListener {
     private final Image fundo;
     private final Player player;
     private final Timer timer;
+    ImageIcon referencia;
 
 
     public Fase(){
@@ -24,7 +25,7 @@ public class Fase extends JPanel implements ActionListener {
         setFocusable(true);
         setDoubleBuffered(true);
         
-        ImageIcon referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\fundoteste.png");
+        referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\fundoteste.png");
         fundo = referencia.getImage();
         
         player = new Player();
@@ -38,12 +39,24 @@ public class Fase extends JPanel implements ActionListener {
 
     }
 
+
     @Override
     public void paint(Graphics g){
         Graphics2D graficos = (Graphics2D) g;
-        graficos.drawImage(fundo, 0, 0, null);
+
+        int teste=2;                                        //implementar troca de cenario
+        if (teste > 1) {
+            graficos.drawImage(fundo, 0, 0, null);            
+        }
+
         graficos.drawImage(player.getImagem(),player.getX(),player.getY(),this);
         g.dispose();
+        System.out.println("fasdf");
+    }
+
+    public void cenario() {
+        
+        
 
     }
 
@@ -54,24 +67,14 @@ public class Fase extends JPanel implements ActionListener {
     }
     
     private class TecladoAdapter extends KeyAdapter{                    //entrada dos valores do teclado
-    
         @Override
-        public void keyPressed(KeyEvent e){
-            int codigo = e.getKeyCode();
-            
-            if(codigo == KeyEvent.VK_UP){
-
-                player.personagemUp();
-                System.out.println("teste");
-
-            }    
-
+        public void keyPressed(KeyEvent e){           
             player.keyPressed(e);
-            
         }
         
         @Override
         public void keyReleased(KeyEvent e){
+            
             player.keyRelease(e);
         }
         

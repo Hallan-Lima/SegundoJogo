@@ -11,8 +11,15 @@
  * https://www.youtube.com/watch?v=sBoAecYJN0w
  * https://www.youtube.com/watch?v=Ics80J6JgGo
  *
+ *      #jogo 2D
+ * 
+ * https://youtu.be/5aE55KZ93xw?list=PLlW3qrNjsvBwUmUk9kio7bNT3GR554FH5                     --> criado a estrutura
+ * https://www.youtube.com/watch?v=ntDvADUoMs8&list=PLnOrFdw5rkTzLcPRa_JKmpMqzNGIlLi3r      --> desenvolvendo o personagem 
+ * 
+ * 
  */
 package Construtor;
+
 
 import java.io.BufferedReader;
 import java.io.FileInputStream;
@@ -121,4 +128,5 @@ public class ConstrutorJogo {
     public void setQtFazendas(String QtFazendas) {
         this.QtFazendas = QtFazendas;
     }
+
 }

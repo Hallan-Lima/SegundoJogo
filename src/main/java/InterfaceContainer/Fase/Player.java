@@ -7,10 +7,10 @@ import java.awt.event.KeyEvent;
 public class Player {
 
     private int x,y;
-    private int dx,dy;
+    private int dx,dy,a=0, posicao;
     private Image imagem;
     private int personagem;
-
+    int sprite=0;
 
     public Player(){                //local de nacimento
         this.x = 250;
@@ -22,6 +22,117 @@ public class Player {
         ImageIcon referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_down1.png");
         imagem = referencia.getImage();
     
+    }
+
+    public void personagemParado() {
+        
+        ImageIcon referencia;
+        
+        if (posicao == 1) {
+            
+            referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up1.png");
+            imagem = referencia.getImage();
+
+        } 
+        if (posicao == 2) {
+            
+            sprite++;
+            switch (sprite) {
+                case 10:
+                    
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_down1.png");
+                imagem = referencia.getImage();
+
+                    break;
+
+                case 30:
+                    
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_down2.png");
+                imagem = referencia.getImage();
+
+                    break;
+
+                case 60:
+                    
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_down3.png");
+                imagem = referencia.getImage();
+    
+                sprite=0;
+                    break;
+            
+                default:
+                    break;
+            }
+                
+        }
+        if (posicao == 3) {
+            
+            sprite++;
+            switch (sprite) {
+                case 10:
+                    
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_left1.png");
+                imagem = referencia.getImage();
+
+                    break;
+
+                case 30:
+                    
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_left3.png");
+                imagem = referencia.getImage();
+
+                sprite=0;
+                    break;
+
+                //case 60:
+                    
+                //referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_left3.png");
+                //imagem = referencia.getImage();
+    
+                //sprite=0;
+                //    break;
+            
+                default:
+                    break;
+            }
+                
+        }
+        if (posicao == 4) {
+            
+            sprite++;
+            switch (sprite) {
+                case 10:
+                    
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_right1.png");
+                imagem = referencia.getImage();
+
+                    break;
+
+                case 30:
+                    //tem que ajustar a imagem
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_right2.png");
+                imagem = referencia.getImage();
+
+                    break;
+
+                case 60:
+                    
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_right3.png");
+                imagem = referencia.getImage();
+    
+                sprite=0;
+                    break;
+            
+                default:
+                    break;
+            }
+                
+        }
+
+        if (sprite > 62) {
+            sprite=0;
+        }
+
     }
 
     public void personagemDown() {
@@ -102,63 +213,61 @@ public class Player {
     }
 
     public void personagemUp() {
-
+        
         ImageIcon referencia;
 
         personagem++;
-
-        System.out.println(personagem);
 
         if (personagem == 1) {
             
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up1.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 2) {
+        }if (personagem == 3) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up2.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 3) {
+        }if (personagem == 6) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up3.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 4) {
+        }if (personagem == 9) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up4.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 5) {
+        }if (personagem == 12) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up5.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 6) {
+        }if (personagem == 15) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up6.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 7) {
+        }if (personagem == 17) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up7.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 8) {
+        }if (personagem == 20) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up8.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 9) {
+        }if (personagem == 23) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up9.png");
             imagem = referencia.getImage();
 
-        }if (personagem == 10) {
+        }if (personagem == 26) {
 
             referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\player_up10.png");
             imagem = referencia.getImage();
-        }if (personagem >= 11) {
+        }if (personagem >= 26) {
             personagem  = 0;
         }
 
@@ -319,8 +428,18 @@ public class Player {
     }
 
     public void update(){           //mover o player
-        x += dx;
-        y += dy;
+        
+        if (a >= 2) {               //gambiarra para o personagem não ser arrastado
+         
+            x += dx;
+            y += dy;
+            
+        }
+        if ((dx == 0) && (dy == 0)) {
+            a=0;
+            personagemParado();
+
+        }
     }
 
     public int getX() {
@@ -342,17 +461,24 @@ public class Player {
         if (this.y < 60) {
             dy=0;               
         } else {
-            dy=-1;    
+
+            a++;
+            personagem++;
+            personagemUp();
+            dy=-1;
+            dx=0;                   //para não andar em diagonal
         }
     }    
     
     if(codigo == KeyEvent.VK_DOWN){
         if (this.y > 600) {
-            dy=0;               
+            dy=0; 
         } else {
+            a++;
             personagem++;
             personagemDown();
-            dy=1;  
+            dy=1;
+            dx=0;
         }
     }    
     
@@ -360,40 +486,49 @@ public class Player {
         if (this.x < 60) {
             dx=0;               
         } else {
+            a++;
             personagem++;
             personagemLeft();           
             dx=-1;   
+            dy=0;
         }
     }    
     
     if(codigo == KeyEvent.VK_RIGHT){
         if (this.x > 950) {
             dx=0;
+            
         } else {
+            a++;
             personagem++;
             personagemRight();
             dx=1;
+            dy=0;
         }
     }    
 }
 
     public void keyRelease(KeyEvent tecla){         //quando parar de precionar a tecla
     int codigo = tecla.getKeyCode();
-
+    
     if(codigo == KeyEvent.VK_UP){
             dy=0;
+            posicao=1;
     }    
     
     if(codigo == KeyEvent.VK_DOWN){
             dy=0;
+            posicao=2;
     }    
     
     if(codigo == KeyEvent.VK_LEFT){
             dx=0;
+            posicao=3;
     }    
     
     if(codigo == KeyEvent.VK_RIGHT){
             dx=0;
+            posicao=4;
     } 
 
 }

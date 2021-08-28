@@ -1,5 +1,6 @@
 import Construtor.ConstrutorJogo;
 
+
 /**
  *
  * @author hlima
@@ -8,8 +9,11 @@ public class TelaInicial extends javax.swing.JFrame {
        
     ConstrutorJogo construtor = new ConstrutorJogo();
 
+    int a=0;
+
     public TelaInicial() {
         initComponents();
+
     }
 
     @SuppressWarnings("unchecked")
