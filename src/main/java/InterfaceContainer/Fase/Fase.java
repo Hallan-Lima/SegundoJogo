@@ -7,19 +7,18 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+
 import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
-
 public class Fase extends JPanel implements ActionListener {
     
-    private final Image fundo;
+    private Image fundo;
     private final Player player;
     private final Timer timer;
-    ImageIcon referencia;
-
-
+    private ImageIcon referencia;
+   
     public Fase(){
 
         setFocusable(true);
@@ -27,10 +26,9 @@ public class Fase extends JPanel implements ActionListener {
         
         referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\fundoteste.png");
         fundo = referencia.getImage();
-        
+
         player = new Player();
         player.load();
-        
         
         addKeyListener(new TecladoAdapter());
 
@@ -39,24 +37,13 @@ public class Fase extends JPanel implements ActionListener {
 
     }
 
-
     @Override
     public void paint(Graphics g){
+
         Graphics2D graficos = (Graphics2D) g;
-
-        int teste=2;                                        //implementar troca de cenario
-        if (teste > 1) {
-            graficos.drawImage(fundo, 0, 0, null);            
-        }
-
+        graficos.drawImage(fundo, 0, 0, null);            
         graficos.drawImage(player.getImagem(),player.getX(),player.getY(),this);
         g.dispose();
-        System.out.println("fasdf");
-    }
-
-    public void cenario() {
-        
-        
 
     }
 

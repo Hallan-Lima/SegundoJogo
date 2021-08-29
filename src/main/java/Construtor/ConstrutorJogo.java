@@ -26,6 +26,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
+import java.io.InputStream;
+
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.FloatControl;
+
 
 /**
  *
@@ -128,5 +135,70 @@ public class ConstrutorJogo {
     public void setQtFazendas(String QtFazendas) {
         this.QtFazendas = QtFazendas;
     }
+
+    public void audio() {
+
+        Clip clip=null;
+        AudioInputStream ais=null;
+        FloatControl gainControl=null;
+        
+        InputStream audio = getClass().getClassLoader().getResourceAsStream("\\InterfaceContainer\\audio\\ambiente.wav");
+        try {
+
+            ais = AudioSystem.getAudioInputStream(audio);
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+
+            gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-20.0f);                       //comando para diminuir volume           
+            
+            clip.loop(-1);
+            clip.start();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void audioPlay() {
+
+        Clip clip=null;
+        AudioInputStream ais=null;
+        
+        InputStream audio = getClass().getClassLoader().getResourceAsStream("\\InterfaceContainer\\audio\\drop.wav");
+        try {
+
+            ais = AudioSystem.getAudioInputStream(audio);
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void audioAndando() {
+
+        Clip clip=null;
+        AudioInputStream ais=null;
+        
+        InputStream audio = getClass().getClassLoader().getResourceAsStream("\\InterfaceContainer\\audio\\steps.wav");
+        try {
+
+            ais = AudioSystem.getAudioInputStream(audio);
+            clip = AudioSystem.getClip();
+            clip.open(ais);
+            clip.start();
+        } 
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
+    }
+
+
 
 }

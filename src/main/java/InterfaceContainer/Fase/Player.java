@@ -1,8 +1,12 @@
 package InterfaceContainer.Fase;
 
 import javax.swing.ImageIcon;
+
+import Construtor.ConstrutorJogo;
+
 import java.awt.Image;
 import java.awt.event.KeyEvent;
+import java.lang.reflect.Constructor;
 
 public class Player {
 
@@ -10,7 +14,8 @@ public class Player {
     private int dx,dy,a=0, posicao;
     private Image imagem;
     private int personagem;
-    int sprite=0;
+    private int sprite=0;
+
 
     public Player(){                //local de nacimento
         this.x = 250;
@@ -52,7 +57,7 @@ public class Player {
 
                     break;
 
-                case 60:
+                case 40:
                     
                 referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_down3.png");
                 imagem = referencia.getImage();
@@ -81,16 +86,15 @@ public class Player {
                 referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_left3.png");
                 imagem = referencia.getImage();
 
-                sprite=0;
                     break;
 
-                //case 60:
+                case 40:
                     
-                //referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_left3.png");
-                //imagem = referencia.getImage();
+                referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_left1.png");
+                imagem = referencia.getImage();
     
-                //sprite=0;
-                //    break;
+                sprite=0;
+                    break;
             
                 default:
                     break;
@@ -115,7 +119,7 @@ public class Player {
 
                     break;
 
-                case 60:
+                case 40:
                     
                 referencia = new ImageIcon("src\\main\\java\\InterfaceContainer\\Imagens\\playerparado_right3.png");
                 imagem = referencia.getImage();
@@ -433,7 +437,8 @@ public class Player {
          
             x += dx;
             y += dy;
-            
+
+            System.out.println("x -"+x+" y -"+y);
         }
         if ((dx == 0) && (dy == 0)) {
             a=0;
@@ -456,10 +461,13 @@ public class Player {
     
     public void keyPressed(KeyEvent tecla){             //comando para movimentar o player
     int codigo = tecla.getKeyCode();
+
+    ConstrutorJogo constructor = new ConstrutorJogo();
+    constructor.audioAndando();
     
     if(codigo == KeyEvent.VK_UP){
         if (this.y < 60) {
-            dy=0;               
+            dy=0;             
         } else {
 
             a++;
@@ -510,6 +518,7 @@ public class Player {
 
     public void keyRelease(KeyEvent tecla){         //quando parar de precionar a tecla
     int codigo = tecla.getKeyCode();
+
     
     if(codigo == KeyEvent.VK_UP){
             dy=0;

@@ -14,6 +14,8 @@ public class TelaInicial extends javax.swing.JFrame {
     public TelaInicial() {
         initComponents();
 
+        ConstrutorJogo contrutor = new ConstrutorJogo();
+        contrutor.audio();
     }
 
     @SuppressWarnings("unchecked")
@@ -131,7 +133,8 @@ public class TelaInicial extends javax.swing.JFrame {
  
             TelaJogo tela = new TelaJogo();             // criando obj
             tela.exportaNome(construtor);               // enviar nome
-            
+
+            construtor.audioPlay();
 
             tela.setVisible(true);                      // chamando tela
             dispose();                                  // fechando tela inicial
