@@ -39,6 +39,7 @@ public class TelaJogo extends javax.swing.JFrame {
         QtAlimentos=100,            QtPessoas=10,               QtVilas=1,              delay1=10000000,
         delay2=4000,                QtTurnos,                   QtMoedas,               QtBarraOuro;
     
+    private int valorA=102, valorB=102, valorC=102;
     String nome;                                                // nome do jogador
     
     Random aleatorio = new Random();                            // gerador de numeros
@@ -445,7 +446,6 @@ public class TelaJogo extends javax.swing.JFrame {
 
         if ((construtor.QtSpinnerSoldados != 0) && (QtSoldados <= QtPessoas)) {
             QtSoldados += construtor.QtSpinnerSoldados;
-            System.out.println("deu certo");
         }
 
     }
@@ -502,7 +502,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         if (QtPessoas < QtTrabalhadores) {
 
-            construtor.setQtTrabalhadores(QtPessoas);            // enviar quanntidade de pessoas
+            construtor.setQtTrabalhadores(QtPessoas);            // enviar quantidade de pessoas
             TelaTarefas tela = new TelaTarefas();                // criando obj
             tela.exportaTrabalhadores(construtor);               // enviar Quantidade de pessoas
             tela.Atualizar();
@@ -518,8 +518,22 @@ public class TelaJogo extends javax.swing.JFrame {
             btnOp3.setEnabled(true);
 
         }
+        if (QtPessoas > QtTrabalhadores) {              //mudar a cor do botão para quando tiver pessoas sem trabalho
+            valorA=150;
+            valorB=200;
+            valorC=200;
+            
+            btnCentral.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(valorA, valorB, valorC)));
 
-        
+        }else{
+            valorA=102;
+            valorB=102;
+            valorC=102;
+            
+            btnCentral.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(valorA, valorB, valorC)));
+
+        }
+
 
         // validar quantidade de pessoas e ajustar automaticamente #FAZER
     }
@@ -692,7 +706,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
         btnCentral.setForeground(new java.awt.Color(255, 255, 255));
         btnCentral.setText("Tarefas");
-        btnCentral.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(102, 102, 102)));
+        btnCentral.setBorder(javax.swing.BorderFactory.createMatteBorder(1, 1, 1, 1, new java.awt.Color(valorA, valorB, valorC)));
         btnCentral.setContentAreaFilled(false);
         btnCentral.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -836,11 +850,17 @@ public class TelaJogo extends javax.swing.JFrame {
         
         Container interfaContainer = new Container();
         interfaContainer.setVisible(true);
+
+        construtor.audioAndando(Valor++);
+        construtor.audioClick();
         
     }//GEN-LAST:event_btnExplorarActionPerformed
 
     private void btnSairActionPerformed(java.awt.event.ActionEvent evt) {//botão sair
         // #Sair
+        
+        construtor.audioClick();
+        
         if (QtPessoas==0) {
 
             VtPrimeirosPassos=0;
@@ -850,11 +870,15 @@ public class TelaJogo extends javax.swing.JFrame {
         } else {
             System.exit(0);
         }
+
+
         
     }                                       
 
     private void btnOp1ActionPerformed(java.awt.event.ActionEvent evt) {//botão opção 1
         // #Opção 1
+        construtor.audioClick();
+
         switch(Vt){
             case 1:     //Iniviar Tutorial
                 Vt=2;
@@ -971,6 +995,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     private void btnOp2ActionPerformed(java.awt.event.ActionEvent evt) {//botão opção 2
         // #Opção 2
+        construtor.audioClick();
 
         switch(Vt){
             case 12:    //Inicio Historia
@@ -1056,6 +1081,7 @@ public class TelaJogo extends javax.swing.JFrame {
 
     private void btnOp3ActionPerformed(java.awt.event.ActionEvent evt) {//botão opção 3
         // #Opção 3
+        construtor.audioClick();
 
         switch(Vt){
             case 1:     //Não quero iniciar Tutorial?
@@ -1150,11 +1176,14 @@ public class TelaJogo extends javax.swing.JFrame {
     private void btnCentralActionPerformed(java.awt.event.ActionEvent evt) {//botão de tarefas
         // Abrir Central de tarefas
 
+        construtor.audioClick();
+
         construtor.setQtTrabalhadores(QtPessoas);            // enviar quanntidade de pessoas
         TelaTarefas tela = new TelaTarefas();                // criando obj
         tela.exportaTrabalhadores(construtor);               // enviar Quantidade de pessoas
         tela.Atualizar();
         tela.setVisible(true);
+
 
     }
 

@@ -45,7 +45,6 @@ public class ConstrutorJogo {
     private     int     QtTrabalhadores;
     public      int     QtSpinnerFazendas,   QtSpinnerConstrucao,    QtSpinnerFerreiro,  QtSpinnerSoldados,  QtSpinnerExploradores,
     QtSpinnerMineradores,   QtSpinnerFeiticaria,    QtSpinnerCiencia;
-    public      boolean isRunning;
 
     public void Escritor(){
         try {
@@ -161,18 +160,25 @@ public class ConstrutorJogo {
 
     }
 
-    public void audioPlay() {
+    public void audioClick() {
 
         Clip clip=null;
         AudioInputStream ais=null;
+        FloatControl gainControl=null;
         
-        InputStream audio = getClass().getClassLoader().getResourceAsStream("\\InterfaceContainer\\audio\\drop.wav");
+
+        InputStream audio = getClass().getClassLoader().getResourceAsStream("\\InterfaceContainer\\audio\\click.wav");
         try {
 
             ais = AudioSystem.getAudioInputStream(audio);
             clip = AudioSystem.getClip();
             clip.open(ais);
+
+            gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
+            gainControl.setValue(-35.0f);                       //comando para diminuir volume   
+
             clip.start();
+
         } 
         catch (Exception e) {
             e.printStackTrace();
@@ -180,25 +186,26 @@ public class ConstrutorJogo {
 
     }
 
-    public void audioAndando() {
+    public void audioAndando(int valor) {
 
         Clip clip=null;
         AudioInputStream ais=null;
-        
         InputStream audio = getClass().getClassLoader().getResourceAsStream("\\InterfaceContainer\\audio\\steps.wav");
-        try {
 
-            ais = AudioSystem.getAudioInputStream(audio);
-            clip = AudioSystem.getClip();
-            clip.open(ais);
-            clip.start();
-        } 
-        catch (Exception e) {
-            e.printStackTrace();
+        if (valor == 1) {
+            try {
+                ais = AudioSystem.getAudioInputStream(audio);
+                clip = AudioSystem.getClip();
+                clip.open(ais);
+                clip.start();    
+            
+                System.out.println(valor);
+            } 
+            catch (Exception e) {
+                e.printStackTrace();
+            }
         }
 
     }
-
-
 
 }

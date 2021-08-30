@@ -36,7 +36,7 @@ public class TelaInicial extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Descrição do Jogo");
+        jLabel1.setText("<html>Este jogo foi desenvolvido apenas para aprimorar os conhecimentos<br> no desenvolvimento de JAVA.<br><br>Você tera o papel de um líder,<br> onde suas escolhas podem gerar consequências.</html>");
 
         jButton1.setBackground(new java.awt.Color(153, 255, 153));
         jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
@@ -134,7 +134,7 @@ public class TelaInicial extends javax.swing.JFrame {
             TelaJogo tela = new TelaJogo();             // criando obj
             tela.exportaNome(construtor);               // enviar nome
 
-            construtor.audioPlay();
+            construtor.audioClick();
 
             tela.setVisible(true);                      // chamando tela
             dispose();                                  // fechando tela inicial

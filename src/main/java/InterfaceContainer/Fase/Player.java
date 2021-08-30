@@ -14,12 +14,15 @@ public class Player {
     private int dx,dy,a=0, posicao;
     private Image imagem;
     private int personagem;
+    public  int valor2=0,laco=0;
     private int sprite=0;
 
 
     public Player(){                //local de nacimento
-        this.x = 250;
-        this.y = 500;
+        
+        this.x = 471;
+        this.y = 343;
+
     }
 
     public void load() {
@@ -438,7 +441,7 @@ public class Player {
             x += dx;
             y += dy;
 
-            System.out.println("x -"+x+" y -"+y);
+           System.out.println("x -"+x+" y -"+y);
         }
         if ((dx == 0) && (dy == 0)) {
             a=0;
@@ -462,8 +465,6 @@ public class Player {
     public void keyPressed(KeyEvent tecla){             //comando para movimentar o player
     int codigo = tecla.getKeyCode();
 
-    ConstrutorJogo constructor = new ConstrutorJogo();
-    constructor.audioAndando();
     
     if(codigo == KeyEvent.VK_UP){
         if (this.y < 60) {
@@ -518,6 +519,9 @@ public class Player {
 
     public void keyRelease(KeyEvent tecla){         //quando parar de precionar a tecla
     int codigo = tecla.getKeyCode();
+
+    ConstrutorJogo constructor = new ConstrutorJogo();
+    constructor.audioAndando(valor2=0);
 
     
     if(codigo == KeyEvent.VK_UP){

@@ -528,12 +528,14 @@ public class TelaTarefas extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//botão fechar
+        construtor.audioClick();
         dispose();
         tela.Jogo();
     }
 
     void calcular(){                            // função para calcular qt. trabalhadores
 
+        construtor.audioClick();
         construtor.Leitor();
            
         if (1 == VtCalcular) {                       //Somar

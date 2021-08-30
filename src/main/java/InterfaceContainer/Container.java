@@ -8,7 +8,6 @@ public class Container extends JFrame{
     
     public Container(){
     
-      
         add(new Fase());
         setTitle("Meu Jogo");                                       //titulo da tela
         setSize(1024,720);                                          //largura da tela
